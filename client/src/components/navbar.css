@@ -1,0 +1,35 @@
+.navbar{
+  display: flex;
+  justify-content: space-between;
+  justify-items: center;
+  padding: 12px 0 12px 0;
+  font-size: medium;
+}
+.navbar-lest{
+  display: none;
+  gap:1rem;
+  font-size: small;
+  color: #6c757d;
+}
+@media screen and (min-width: 768px) {
+  .navbar-lest{
+    display: flex;
+  }
+}
+.navbar-lest1{
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap:4px;
+}
+.a1{
+  text-decoration: none;
+  color: #6c757d;
+}
+.custom-hr{
+  border: none;
+  height: 1.5px;
+  background-color: #374151;
+  width: 50%;
+  margin: 0 auto;
+}
