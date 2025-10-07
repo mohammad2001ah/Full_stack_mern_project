@@ -1,0 +1,163 @@
+/* الصفحة الرئيسية */
+.home-page {
+  font-family: Arial, sans-serif;
+  text-align: center;
+  color: #333;
+}
+
+/* Hero Section */
+.hero {
+  height: 80vh;
+  background-size: cover;
+  background-position: center;
+  position: relative;
+}
+
+.hero-overlay {
+  background-color: rgba(0, 0, 0, 0.5);
+  color: white;
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  text-align: center;
+  padding: 0 20px;
+}
+
+.hero-overlay h1 {
+  font-size: 48px;
+  margin-bottom: 20px;
+}
+
+.hero-overlay p {
+  font-size: 20px;
+  margin-bottom: 30px;
+}
+
+.shop-now-btn {
+  padding: 12px 30px;
+  background-color: #343834;
+  color: white;
+  border: none;
+  border-radius: 6px;
+  cursor: pointer;
+  font-size: 16px;
+  transition: background-color 0.3s ease;
+}
+
+.shop-now-btn:hover {
+  background-color: #1f1f1f;
+}
+
+/* Features Section */
+.features {
+  padding: 50px 20px;
+  background-color: #f9f9f9;
+}
+
+.features h2 {
+  margin-bottom: 30px;
+  color: #343834;
+}
+
+.features-container {
+  display: flex;
+  justify-content: center;
+  gap: 20px;
+  flex-wrap: wrap;
+}
+
+.feature-card {
+  background-color: white;
+  padding: 15px;
+  border-radius: 10px;
+  width: 220px;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+  transition: transform 0.3s ease;
+  text-align: center;
+}
+
+.feature-card:hover {
+  transform: translateY(-10px);
+}
+
+.feature-image {
+  width: 100%;
+  height: 150px;
+  object-fit: cover;
+  border-radius: 8px;
+  margin-bottom: 10px;
+}
+
+.feature-card h3 {
+  margin: 10px 0 5px 0;
+  color: #343834;
+}
+
+.feature-card p {
+  margin-bottom: 10px;
+  color: #555;
+}
+
+/* Featured Products Section */
+.featured-products {
+  padding: 50px 20px;
+}
+
+.featured-products h2 {
+  margin-bottom: 30px;
+  color: #343834;
+}
+
+.products-container {
+  display: flex;
+  justify-content: center;
+  gap: 20px;
+  flex-wrap: wrap;
+}
+
+.product-card {
+  background-color: white;
+  padding: 15px;
+  border-radius: 10px;
+  width: 200px;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+  transition: transform 0.3s ease;
+}
+
+.product-card:hover {
+  transform: translateY(-10px);
+}
+
+.product-card img {
+  width: 100%;
+  height: 150px;
+  object-fit: cover;
+  border-radius: 8px;
+  margin-bottom: 10px;
+}
+
+.product-card h3 {
+  margin: 10px 0 5px 0;
+  color: #343834;
+}
+
+.product-card p {
+  margin-bottom: 10px;
+  color: #555;
+}
+
+.product-card button {
+  padding: 8px 15px;
+  background-color: #343834;
+  color: white;
+  border: none;
+  border-radius: 6px;
+  cursor: pointer;
+  font-size: 14px;
+}
+
+.product-card button:hover {
+  background-color: #1f1f1f;
+}
