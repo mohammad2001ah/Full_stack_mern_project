@@ -36,20 +36,20 @@ export default function Navbar() {
           </ul>
 
           {/* Search Icon */}
-          <div className="d-flex search mx-3" style={{ cursor: "pointer" }}>
+          <div className="d-flex search mx-2" style={{ cursor: "pointer" }}>
             <FontAwesomeIcon icon={faMagnifyingGlass} />
           </div>
 
           {/* User Dropdown */}
           <div className="dropdown">
             <div
-              className="d-flex user"
+              className="d-flex user mx-2 my-2"
               style={{ cursor: "pointer" }}
               data-bs-toggle="dropdown"
             >
               <FontAwesomeIcon icon={faUser} />
             </div>
-            <ul className="dropdown-menu dropdown-menu-end" style={{cursor: "pointer",marginTop:"10px"}}>
+            <ul className="dropdown-menu dropdown-menu-end " style={{cursor: "pointer",marginTop:"10px"}}>
               <li><a className="dropdown-item">My Profile</a></li>
               <li><a className="dropdown-item">Orders</a></li>
               <li><a className="dropdown-item">Logout</a></li>
@@ -57,7 +57,6 @@ export default function Navbar() {
           </div>
         </div>
         <link to='/cart' className="relative">
-
         </link>
       </div>
     </nav>

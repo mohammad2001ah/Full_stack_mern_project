@@ -1,0 +1,27 @@
+.about{
+    background-color: #343834; /* Green */
+    border: none;
+    color: white;
+    padding: 15px 32px;
+    text-align: center;
+    text-decoration: none;
+    display: inline-block;
+    font-size: 16px;
+    margin: 4px 2px;
+    cursor: pointer;
+    border-radius: 50px;
+}
+.about:hover {
+    background-color: #584f4f; /* Darker green */
+}
+.my::after{
+  
+    content: '';
+    display:inline-block;
+    background-color:black;
+    width: 7px;
+    height: 7px;
+    border-radius: 50%;
+    transform: translateY(-1px);
+    margin-left: 5px;
+}
