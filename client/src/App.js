@@ -1,16 +1,17 @@
 import React from 'react'
 import { BrowserRouter,Router, Route, Routes } from 'react-router-dom';
 // Import Pages
-import About from './pages/About';
+import About from './components/About';
 import Cart from './pages/Cart';
-import Collection from './pages/Collection';
+import Collection from './components/Collection';
 import Contact from './components/Contact';
 import Home from './components/Home';
-import Login from './pages/Login';
+import Login from './components/Login';
 import Orders from './pages/Orders';
 import PlaceOrder from './pages/PlaceOrder';
 import Product from './pages/Product';
 import Footer from './components/Footer';
+import Signup from './components/Signup';
 
 //Import Components
 import Navbar from './components/Navbar';
@@ -26,6 +27,7 @@ function App() {
         <Route path='/contact' element={<Contact/>}/>
         <Route path='/cart' element={<Cart/>}/>
         <Route path='/login' element={<Login/>}/>
+        <Route path='/signup' element={<Signup/>}/>
         <Route path='/orders' element={<Orders/>}/>
         <Route path='/product:productId' element={<Product/>}/>
         <Route path='/place-order' element={<PlaceOrder/>}/>

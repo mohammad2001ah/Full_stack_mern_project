@@ -1,0 +1,80 @@
+
+.login-page {
+  font-family: Arial, sans-serif;
+  min-height: 100vh;
+  background-image: url('../images/login.jpg'); 
+  background-size: cover;
+  background-position: center;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.login-overlay {
+  background-color: rgba(0,0,0,0.6); 
+  width: 100%;
+  min-height: 100vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 20px;
+}
+
+.login-container {
+  background-color: white;
+  padding: 40px 30px;
+  border-radius: 12px;
+  box-shadow: 0 6px 20px rgba(0,0,0,0.15);
+  width: 100%;
+  max-width: 400px;
+  text-align: center;
+}
+
+.login-container h2 {
+  color: #343834;
+  margin-bottom: 25px;
+}
+
+.login-container label {
+  display: block;
+  margin: 15px 0 5px;
+  text-align: left;
+  font-weight: bold;
+  color: #343834;
+}
+
+.login-container input {
+  width: 100%;
+  padding: 10px 12px;
+  margin-bottom: 10px;
+  border-radius: 6px;
+  border: 1px solid #ccc;
+  font-size: 14px;
+}
+
+.login-container button {
+  width: 100%;
+  padding: 12px 0;
+  background-color: #343834;
+  color: white;
+  border: none;
+  border-radius: 8px;
+  cursor: pointer;
+  font-size: 16px;
+  margin-top: 15px;
+  transition: background-color 0.3s ease;
+}
+
+.login-container button:hover {
+  background-color: #1f1f1f;
+}
+
+.signup-link {
+  color: #343834;
+  font-weight: bold;
+  cursor: pointer;
+}
+
+.signup-link:hover {
+  text-decoration: none;
+}

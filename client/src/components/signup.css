@@ -1,0 +1,120 @@
+.register-page {
+  font-family: Arial, sans-serif;
+  min-height: 100vh;
+  background-image: url('../images/signup.jpg');
+  background-size: cover;
+  background-position: center;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.register-overlay {
+  background-color: rgba(0,0,0,0.6);
+  width: 100%;
+  min-height: 100vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 20px;
+}
+
+.register-container {
+  background-color: white;
+  padding: 40px 30px;
+  border-radius: 12px;
+  box-shadow: 0 6px 20px rgba(0,0,0,0.15);
+  width: 100%;
+  max-width: 400px;
+  text-align: center;
+}
+
+.register-container h2 {
+  color: #343834;
+  margin-bottom: 25px;
+}
+
+.register-container label {
+  display: block;
+  margin: 15px 0 5px;
+  text-align: left;
+  font-weight: bold;
+  color: #343834;
+}
+
+.register-container input {
+  width: 100%;
+  padding: 10px 12px;
+  margin-bottom: 10px;
+  border-radius: 6px;
+  border: 1px solid #ccc;
+  font-size: 14px;
+}
+
+.register-container button[type="submit"] {
+  width: 100%;
+  padding: 12px 0;
+  background-color: #343834;
+  color: white;
+  border: none;
+  border-radius: 8px;
+  cursor: pointer;
+  font-size: 16px;
+  margin-top: 15px;
+  transition: background-color 0.3s ease;
+}
+
+.register-container button[type="submit"]:hover {
+  background-color: #1f1f1f;
+}
+
+/* Social Login */
+.social-login {
+  margin: 20px 0;
+}
+
+.social-login p {
+  margin-bottom: 10px;
+}
+
+.social-buttons {
+  display: flex;
+  justify-content: center;
+  gap: 15px;
+}
+
+.google-btn {
+  background-color: #db4437;
+  color: white;
+  border: none;
+  padding: 8px 15px;
+  border-radius: 6px;
+  cursor: pointer;
+}
+
+.facebook-btn {
+  background-color: #4267B2;
+  color: white;
+  border: none;
+  padding: 8px 15px;
+  border-radius: 6px;
+  cursor: pointer;
+}
+
+.google-btn:hover {
+  background-color: #b33c2e;
+}
+
+.facebook-btn:hover {
+  background-color: #365899;
+}
+
+.login-link {
+  color: #343834;
+  font-weight: bold;
+  cursor: pointer;
+}
+
+.login-link:hover {
+  text-decoration: underline;
+}

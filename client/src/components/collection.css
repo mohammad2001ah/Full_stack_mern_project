@@ -1,0 +1,120 @@
+.collection-page {
+  font-family: Arial, sans-serif;
+  text-align: center;
+  color: #333;
+}
+
+/* Header Section */
+.collection-header {
+  position: relative;
+  width: 100%;
+  height: 70vh;
+  overflow: hidden;
+}
+
+.collection-header img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  filter: brightness(65%);
+}
+
+/* النص فوق الصورة */
+.collection-header .text-overlay {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  background-color: rgba(52, 56, 52, 0.6); /* لون المشروع بخلفية شفافة */
+  padding: 40px 60px;
+  border-radius: 12px;
+  color: white;
+  text-align: center;
+  box-shadow: 0 4px 15px rgba(0,0,0,0.3);
+}
+
+.collection-header .text-overlay h1 {
+  font-size: 2.8rem;
+  font-weight: bold;
+  margin-bottom: 10px;
+  letter-spacing: 1px;
+}
+
+.collection-header .text-overlay p {
+  font-size: 1.1rem;
+  color: #f1f1f1;
+  line-height: 1.6;
+}
+
+/* Collections Section */
+.collections {
+  padding: 50px 20px;
+}
+
+.collections-container {
+  display: flex;
+  justify-content: center;
+  gap: 25px;
+  flex-wrap: wrap;
+}
+
+.collection-card {
+  background-color: white;
+  border-radius: 10px;
+  width: 250px;
+  box-shadow: 0 4px 10px rgba(0,0,0,0.1);
+  transition: transform 0.3s ease;
+  overflow: hidden;
+}
+
+.collection-card:hover {
+  transform: translateY(-10px);
+}
+
+.collection-card img {
+  width: 100%;
+  height: 180px;
+  object-fit: cover;
+}
+
+.collection-card h3 {
+  color: #343834;
+  margin: 15px 0 10px;
+}
+
+.collection-card p {
+  color: #555;
+  font-size: 14px;
+  margin: 0 15px 15px;
+}
+
+.collection-card button {
+  background-color: #343834;
+  color: white;
+  border: none;
+  padding: 10px 20px;
+  margin-bottom: 15px;
+  border-radius: 6px;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+}
+
+.collection-card button:hover {
+  background-color: #1f1f1f;
+}
+
+/* Promo Section */
+.promo {
+  background-color: #343834;
+  color: white;
+  padding: 50px 20px;
+}
+
+.promo h2 {
+  font-size: 28px;
+  margin-bottom: 10px;
+}
+
+.promo p {
+  font-size: 16px;
+}

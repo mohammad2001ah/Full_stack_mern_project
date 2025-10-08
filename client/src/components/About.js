@@ -1,5 +1,5 @@
 import { NavLink } from "react-router-dom";
-import "../components/about.css";
+import "./about.css";
 import mystore from "../images/mystore.png";
 export default function About() {
   return (
