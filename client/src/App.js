@@ -8,7 +8,6 @@ import Contact from './components/Contact';
 import Home from './components/Home';
 import Login from './components/Login';
 import Orders from './pages/Orders';
-import PlaceOrder from './pages/PlaceOrder';
 import Product from './pages/Product';
 import Footer from './components/Footer';
 import Signup from './components/Signup';
@@ -30,7 +29,6 @@ function App() {
         <Route path='/signup' element={<Signup/>}/>
         <Route path='/orders' element={<Orders/>}/>
         <Route path='/product:productId' element={<Product/>}/>
-        <Route path='/place-order' element={<PlaceOrder/>}/>
       </Routes>
       <Footer/>
     </div>
