@@ -43,31 +43,30 @@ const getAllUsers=async(req,res)=>{
   }
 };
 
-//login user
-const loginUser=async(req,res)=>{
-  const {email,password}=req.body;
-  //check if user exists or not
+const loginUser = async (req, res) => {
+  const { email, password } = req.body;
   try {
-    const user =await User.findOne({email});
-    if(!user){
-      res.status(401).json({message:"Invalid Email Or Password"});
-    };
-
-    const isMatched =await bcrypt.compare(password,user.password);
-
-    if(!isMatched){
-      res.status(401).json({message:"Invalid Email Or Password"});
+    console.log("Login attempt:", email);
+    
+    const user = await User.findOne({ email });
+    if (!user) {
+      console.log("User not found");
+      return res.status(401).json({ message: "Invalid Email Or Password" });
     }
 
-    if(user){
-      const token= jwt.sign({id:user._id},process.env.JWT_SECRET,{expiresIn:"1h"});
-      res.status(200).json({message:"Login Successful",token,user});
+    const isMatched = await bcrypt.compare(password, user.password);
+    if (!isMatched) {
+      console.log("Password mismatch");
+      return res.status(401).json({ message: "Invalid Email Or Password" });
     }
-    else{
-      res.status(401).json({message:"Invalid Email Or Password"});
-    };
+
+    const token = jwt.sign({ id: user._id }, process.env.JWT_SECRET, { expiresIn: "1h" });
+    console.log("User logged in successfully:", user.email);
+
+    return res.status(200).json({ message: "Login Successful", token, user,role });
   } catch (error) {
-    res.status(500).json({message:error.message});
+    console.error("Login error:", error);
+    return res.status(500).json({ message: error.message });
   }
 };
 

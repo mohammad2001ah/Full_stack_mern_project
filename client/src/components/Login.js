@@ -1,15 +1,36 @@
 import React, { useState } from "react";
-import { NavLink } from "react-router-dom";
 import "./login.css";
+import axios from "axios";
+import { useNavigate,NavLink } from "react-router-dom";
 
 export default function Login() {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
-
-  const handleLogin = (e) => {
+  const [ message ,setMessage]=useState("");
+  
+    const navigate = useNavigate();
+  const handleLogin = async (e) => {
     e.preventDefault();
-    alert(`Email: ${email}\nPassword: ${password}`);
-    // لاحقًا: إرسال البيانات للـ backend
+    try {
+      const res = await axios.post("http://127.0.0.1:5000/api/users/login",
+        {email,password}
+      );
+      setMessage(res.data.message);
+      if(res.status===200){
+        if(res.data.role === 'admin'){
+          navigate("/admin");
+          console.log("Admin login successful");
+        }
+        console.log("Login Successful");
+      };
+    } catch (error) {
+      if(error.response){
+        setMessage(error.response.data.message);
+      }
+      else{
+        setMessage("An error occurred. Please try again later.");
+      }
+    }
   };
 
   return (

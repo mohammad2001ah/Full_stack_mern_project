@@ -11,6 +11,7 @@ import Orders from './pages/Orders';
 import Product from './pages/Product';
 import Footer from './components/Footer';
 import Signup from './components/Signup';
+import AdminDashboard from './components/AdminDashboard';
 
 //Import Components
 import Navbar from './components/Navbar';
@@ -27,6 +28,7 @@ function App() {
         <Route path='/cart' element={<Cart/>}/>
         <Route path='/login' element={<Login/>}/>
         <Route path='/signup' element={<Signup/>}/>
+        <Route path='/admin' element={<AdminDashboard/>}/>
         <Route path='/orders' element={<Orders/>}/>
         <Route path='/product:productId' element={<Product/>}/>
       </Routes>

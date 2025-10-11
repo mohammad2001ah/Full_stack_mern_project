@@ -11,7 +11,6 @@ export default function Signup() {
 
   const navigate = useNavigate();
 
-
   const handleRegister = async(e) => {
     e.preventDefault();
     try {
