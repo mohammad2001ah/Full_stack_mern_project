@@ -1,16 +1,37 @@
 import React, { useState } from "react";
 import "./signup.css";
-import { NavLink } from "react-router-dom";
+import { useNavigate,NavLink } from "react-router-dom";
+import axios from "axios";
 
 export default function Signup() {
   const [name, setName] = useState("");
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
+  const[message,setMessage]=useState("");
 
-  const handleRegister = (e) => {
+  const navigate = useNavigate();
+
+
+  const handleRegister = async(e) => {
     e.preventDefault();
-    alert(`Name: ${name}\nEmail: ${email}\nPassword: ${password}`);
-    // لاحقًا: إرسال البيانات للـ backend
+    try {
+      const res = await axios.post("http://127.0.0.1:5000/api/users/create",
+        {name,email,password}
+      );
+      setMessage(res.data.message);
+      if(res.status===201){
+        navigate("/Login");
+        console.log("User registered successfully");
+        
+      };
+    } catch (error) {
+      if(error.response){
+        setMessage(error.response.data.message);
+      }
+      else{
+        setMessage("An error occurred. Please try again later.");
+      }
+    }
   };
 
   return (
