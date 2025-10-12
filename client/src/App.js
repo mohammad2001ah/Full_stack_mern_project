@@ -1,5 +1,6 @@
 import React from 'react'
-import { BrowserRouter,Router, Route, Routes } from 'react-router-dom';
+import { BrowserRouter,Router, Route, Routes,useLocation } from 'react-router-dom';
+
 // Import Pages
 import About from './components/About';
 import Cart from './pages/Cart';
@@ -16,6 +17,7 @@ import AdminDashboard from './components/AdminDashboard';
 import Navbar from './components/Navbar';
 
 function App() {
+  const location=useLocation();
   return (
     <div className='px-4 sm:px-[5vw] md:pz-[7vm] lg:px-[9vw]'>
       <Navbar/>
@@ -30,7 +32,9 @@ function App() {
         <Route path='/admin' element={<AdminDashboard/>}/>
         <Route path='/orders' element={<Orders/>}/>
       </Routes>
-      <Footer/>
+      {/* <Footer/> */}
+      {location.pathname !== "/admin" && <Footer />}
+
     </div>
   )
 }
