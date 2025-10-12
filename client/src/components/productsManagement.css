@@ -1,0 +1,103 @@
+.products-container {
+  padding: 20px;
+}
+
+.products-container h2 {
+  margin-bottom: 20px;
+  color: #333;
+}
+
+.message {
+  margin-bottom: 15px;
+  color: green;
+  font-weight: bold;
+}
+
+/* Form لإضافة منتج */
+.product-form {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+  margin-bottom: 20px;
+}
+
+.product-form input[type="text"],
+.product-form input[type="number"],
+.product-form input[type="file"] {
+  padding: 8px;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+  flex: 1 1 150px;
+}
+
+.product-form button {
+  padding: 8px 15px;
+  background-color: #007bff;
+  color: white;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  transition: background-color 0.3s;
+}
+
+.product-form button:hover {
+  background-color: #0056b3;
+}
+
+/* جدول المنتجات */
+.products-table {
+  width: 100%;
+  border-collapse: collapse;
+}
+
+.products-table th,
+.products-table td {
+  border: 1px solid #ddd;
+  padding: 10px;
+  text-align: left;
+}
+
+.products-table th {
+  background-color: #f4f4f4;
+  font-weight: bold;
+}
+
+.products-table tr:nth-child(even) {
+  background-color: #fafafa;
+}
+
+.products-table img {
+  border-radius: 5px;
+  object-fit: cover;
+}
+
+.products-table button {
+  padding: 5px 10px;
+  background-color: #dc3545;
+  color: white;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  transition: background-color 0.3s;
+}
+
+.products-table button:hover {
+  background-color: #a71d2a;
+}
+
+/* Responsive */
+@media (max-width: 768px) {
+  .product-form {
+    flex-direction: column;
+  }
+
+  .products-table th,
+  .products-table td {
+    padding: 8px;
+  }
+
+  .products-table img {
+    width: 40px;
+    height: 40px;
+  }
+}
