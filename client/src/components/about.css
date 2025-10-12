@@ -12,10 +12,9 @@
     border-radius: 50px;
 }
 .about:hover {
-    background-color: #584f4f; /* Darker green */
+    background-color: #584f4f; 
 }
 .my::after{
-  
     content: '';
     display:inline-block;
     background-color:black;
