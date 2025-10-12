@@ -1,48 +1,57 @@
-import React from "react";
+import React, { useState } from "react";
 import "./adminDashboard.css";
+import { FaUser, FaBox, FaShoppingCart, FaCog, FaBars } from "react-icons/fa";
 
 export default function AdminDashboard() {
+  const [isOpen, setIsOpen] = useState(false);
+
   return (
     <div className="dashboard-container">
       {/* Sidebar */}
-      <div className="sidebar">
+      <aside className={`sidebar ${isOpen ? "open" : ""}`}>
         <h2 className="sidebar-title">Admin Panel</h2>
         <ul className="sidebar-menu">
-          <li><a href="#">Dashboard</a></li>
-          <li><a href="#">Users</a></li>
-          <li><a href="#">Products</a></li>
-          <li><a href="#">Orders</a></li>
-          <li><a href="#">Settings</a></li>
+          <li><FaUser /> Users</li>
+          <li><FaBox /> Products</li>
+          <li><FaShoppingCart /> Orders</li>
+          <li><FaCog /> Settings</li>
         </ul>
-      </div>
+      </aside>
 
-      {/* Main Content */}
-      <div className="main-content">
-        <nav className="navbar navbar-light bg-light justify-content-between">
-          <a className="navbar-brand ms-3">MY STORE Admin</a>
-          <button className="btn btn-dark me-3">Logout</button>
+      {/* Overlay for small screens */}
+      {isOpen && <div className="sidebar-overlay" onClick={() => setIsOpen(false)}></div>}
+
+      {/* Main content */}
+      <main className="main-content">
+        {/* Navbar */}
+        <nav className="dashboard-navbar">
+          <div className="menu-toggle" onClick={() => setIsOpen(!isOpen)}>
+            <FaBars />
+          </div>
+          <h3>Welcome, Admin</h3>
+          <button className="logout-btn">Logout</button>
         </nav>
 
-        <div className="content-area p-4">
-          <h3>Welcome, Admin</h3>
-          <p>Manage users, products, and orders from your dashboard.</p>
-
-          <div className="stats-container">
-            <div className="stat-box bg-primary text-white">
-              <h4>120</h4>
-              <p>Users</p>
-            </div>
-            <div className="stat-box bg-success text-white">
-              <h4>85</h4>
-              <p>Products</p>
-            </div>
-            <div className="stat-box bg-warning text-dark">
-              <h4>40</h4>
-              <p>Orders</p>
-            </div>
+        {/* Dashboard cards */}
+        <div className="stats-grid">
+          <div className="card">
+            <h4>Total Users</h4>
+            <p>124</p>
+          </div>
+          <div className="card">
+            <h4>Total Products</h4>
+            <p>58</p>
+          </div>
+          <div className="card">
+            <h4>Total Orders</h4>
+            <p>34</p>
+          </div>
+          <div className="card">
+            <h4>Revenue</h4>
+            <p>$3,200</p>
           </div>
         </div>
-      </div>
+      </main>
     </div>
   );
 }

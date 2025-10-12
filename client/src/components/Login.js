@@ -16,11 +16,17 @@ export default function Login() {
         {email,password}
       );
       setMessage(res.data.message);
+      localStorage.setItem("token",res.data.token);
+      localStorage.setItem("user",JSON.stringify(res.data.user));
+      localStorage.setItem("role",res.data.role);
       if(res.status===200){
         if(res.data.role === 'admin'){
           navigate("/admin");
           console.log("Admin login successful");
         }
+        // else{
+        //   navigate("/user");
+        // }
         console.log("Login Successful");
       };
     } catch (error) {
