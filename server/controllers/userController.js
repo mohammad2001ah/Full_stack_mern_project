@@ -71,13 +71,31 @@ const loginUser = async (req, res) => {
   }
 };
 
+//delete user
+const deleteUser=async(req,res)=>{
+  const{id}=req.params;
+  try {
+    const user=  await User.findById(id);
+    if(!user){
+      return res.status(404).json({message:"User Not Found"});
+    }
+    await User.findByIdAndDelete(id);
+    res.status(200).json({message:"User Deleted Successfully"});
+  } catch (error) {
+    res.status(500).json({message:error.message});
+  }
+};
+//update user
 
+const updateUser=async(req,res)=>{
+  const {id}=req.params;
+  const{name,email}=req.body;
+  try {
+    const userToUpdate = await User.findByIdAndUpdate(id,{name,email})
+    res.status(200).json({message:"user Updated done",user:userToUpdate})
+  } catch (error) {
+    res.status(500).json({ message: error });
+  }
+};
 
-
-
-
-
-
-
-
-module.exports={createUser,getAllUsers,loginUser};
+module.exports={createUser,getAllUsers,loginUser,deleteUser,updateUser};
