@@ -1,12 +1,13 @@
-import React from "react";
-import "./footer.css";
-import { FaFacebookF, FaTwitter, FaInstagram, FaLinkedinIn } from "react-icons/fa";
+import React from 'react';
+import { Link } from 'react-router-dom';
+import { FaFacebookF, FaTwitter, FaInstagram, FaLinkedinIn } from 'react-icons/fa';
+import { ROUTES } from '../utils/constants';
+import './footer.css';
 
 export default function Footer() {
   return (
-    <footer className="footer">
+    <footer className="footer" role="contentinfo">
       <div className="footer-container">
-
         {/* About / Logo */}
         <div className="footer-section">
           <h2>MY STORE</h2>
@@ -17,10 +18,18 @@ export default function Footer() {
         <div className="footer-section">
           <h3>Quick Links</h3>
           <ul>
-            <li><a href="/">Home</a></li>
-            <li><a href="/collection">Collections</a></li>
-            <li><a href="/contact">Contact</a></li>
-            <li><a href="/login">Login</a></li>
+            <li>
+              <Link to={ROUTES.HOME}>Home</Link>
+            </li>
+            <li>
+              <Link to={ROUTES.COLLECTION}>Collections</Link>
+            </li>
+            <li>
+              <Link to={ROUTES.CONTACT}>Contact</Link>
+            </li>
+            <li>
+              <Link to={ROUTES.LOGIN}>Login</Link>
+            </li>
           </ul>
         </div>
 
@@ -30,13 +39,20 @@ export default function Footer() {
           <p>Email: support@mystore.com</p>
           <p>Phone: +962 7 1234 5678</p>
           <div className="social-icons">
-            <a href="#"><FaFacebookF /></a>
-            <a href="#"><FaTwitter /></a>
-            <a href="#"><FaInstagram /></a>
-            <a href="#"><FaLinkedinIn /></a>
+            <a href="https://facebook.com" target="_blank" rel="noopener noreferrer" aria-label="Facebook">
+              <FaFacebookF />
+            </a>
+            <a href="https://twitter.com" target="_blank" rel="noopener noreferrer" aria-label="Twitter">
+              <FaTwitter />
+            </a>
+            <a href="https://instagram.com" target="_blank" rel="noopener noreferrer" aria-label="Instagram">
+              <FaInstagram />
+            </a>
+            <a href="https://linkedin.com" target="_blank" rel="noopener noreferrer" aria-label="LinkedIn">
+              <FaLinkedinIn />
+            </a>
           </div>
         </div>
-
       </div>
 
       {/* Copyright */}

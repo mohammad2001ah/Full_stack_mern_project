@@ -1,35 +1,72 @@
-import React, { useState } from "react";
-import "./signup.css";
-import { useNavigate,NavLink } from "react-router-dom";
-import axios from "axios";
+import React, { useState } from 'react';
+import { useNavigate, NavLink } from 'react-router-dom';
+import { useAuth } from '../context/AuthContext';
+import { ROUTES, VALIDATION } from '../utils/constants';
+import Button from './common/Button';
+import Input from './common/Input';
+import './signup.css';
 
 export default function Signup() {
-  const [name, setName] = useState("");
-  const [email, setEmail] = useState("");
-  const [password, setPassword] = useState("");
-  const[message,setMessage]=useState("");
+  const [name, setName] = useState('');
+  const [email, setEmail] = useState('');
+  const [password, setPassword] = useState('');
+  const [confirmPassword, setConfirmPassword] = useState('');
+  const [message, setMessage] = useState('');
+  const [messageType, setMessageType] = useState(''); // 'success' or 'error'
+  const [loading, setLoading] = useState(false);
+  const [errors, setErrors] = useState({});
 
   const navigate = useNavigate();
+  const { register } = useAuth();
 
-  const handleRegister = async(e) => {
+  const validateForm = () => {
+    const newErrors = {};
+
+    if (name.length < VALIDATION.NAME_MIN_LENGTH) {
+      newErrors.name = `Name must be at least ${VALIDATION.NAME_MIN_LENGTH} characters`;
+    }
+
+    if (!VALIDATION.EMAIL_REGEX.test(email)) {
+      newErrors.email = 'Please enter a valid email address';
+    }
+
+    if (password.length < VALIDATION.PASSWORD_MIN_LENGTH) {
+      newErrors.password = `Password must be at least ${VALIDATION.PASSWORD_MIN_LENGTH} characters`;
+    }
+
+    if (password !== confirmPassword) {
+      newErrors.confirmPassword = 'Passwords do not match';
+    }
+
+    setErrors(newErrors);
+    return Object.keys(newErrors).length === 0;
+  };
+
+  const handleRegister = async (e) => {
     e.preventDefault();
-    try {
-      const res = await axios.post("http://127.0.0.1:5000/api/users/create",
-        {name,email,password}
-      );
-      setMessage(res.data.message);
-      if(res.status===201){
-        navigate("/Login");
-        console.log("User registered successfully");
-        
-      };
-    } catch (error) {
-      if(error.response){
-        setMessage(error.response.data.message);
-      }
-      else{
-        setMessage("An error occurred. Please try again later.");
-      }
+    setMessage('');
+    setErrors({});
+
+    if (!validateForm()) {
+      return;
+    }
+
+    setLoading(true);
+
+    const result = await register(name, email, password);
+
+    setLoading(false);
+
+    if (result.success) {
+      setMessageType('success');
+      setMessage(result.message || 'Registration successful! Redirecting to login...');
+      
+      setTimeout(() => {
+        navigate(ROUTES.LOGIN);
+      }, 1500);
+    } else {
+      setMessageType('error');
+      setMessage(result.message || 'Registration failed. Please try again.');
     }
   };
 
@@ -38,47 +75,73 @@ export default function Signup() {
       <div className="register-overlay">
         <div className="register-container">
           <h2>Create Your Account</h2>
+
+          {message && (
+            <div className={`alert alert-${messageType === 'success' ? 'success' : 'danger'}`} role="alert">
+              {message}
+            </div>
+          )}
+
           <form onSubmit={handleRegister}>
-            <label>Name</label>
-            <input
+            <Input
+              label="Name"
               type="text"
+              name="name"
               value={name}
               onChange={(e) => setName(e.target.value)}
               placeholder="Enter your name"
               required
+              error={errors.name}
+              autoComplete="name"
             />
 
-            <label>Email</label>
-            <input
+            <Input
+              label="Email"
               type="email"
+              name="email"
               value={email}
               onChange={(e) => setEmail(e.target.value)}
               placeholder="Enter your email"
               required
+              error={errors.email}
+              autoComplete="email"
             />
 
-            <label>Password</label>
-            <input
+            <Input
+              label="Password"
               type="password"
+              name="password"
               value={password}
               onChange={(e) => setPassword(e.target.value)}
               placeholder="Enter your password"
               required
+              error={errors.password}
+              helperText={`Minimum ${VALIDATION.PASSWORD_MIN_LENGTH} characters`}
+              autoComplete="new-password"
             />
 
-            <button type="submit">Register</button>
+            <Input
+              label="Confirm Password"
+              type="password"
+              name="confirmPassword"
+              value={confirmPassword}
+              onChange={(e) => setConfirmPassword(e.target.value)}
+              placeholder="Confirm your password"
+              required
+              error={errors.confirmPassword}
+              autoComplete="new-password"
+            />
+
+            <Button type="submit" variant="primary" fullWidth loading={loading}>
+              {loading ? 'Creating Account...' : 'Register'}
+            </Button>
           </form>
 
-          <div className="social-login">
-            <p>Or register with:</p>
-            <div className="social-buttons">
-              <button className="google-btn">Google</button>
-              <button className="facebook-btn">Facebook</button>
-            </div>
-          </div>
-
-          <p>
-            Already have an account? <NavLink to='/login' className="login-link">Login</NavLink>
+          <p style={{ marginTop: '20px', textAlign: 'center' }}>
+            Already have an account?{' '}
+            <NavLink to={ROUTES.LOGIN} className="login-link">
+              Login
+            </NavLink>
           </p>
         </div>
       </div>

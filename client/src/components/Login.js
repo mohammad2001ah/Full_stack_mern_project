@@ -1,41 +1,45 @@
-import React, { useState } from "react";
-import "./login.css";
-import axios from "axios";
-import { useNavigate,NavLink } from "react-router-dom";
+import React, { useState } from 'react';
+import { useNavigate, NavLink } from 'react-router-dom';
+import { useAuth } from '../context/AuthContext';
+import { ROUTES } from '../utils/constants';
+import Button from './common/Button';
+import Input from './common/Input';
+import './login.css';
 
 export default function Login() {
-  const [email, setEmail] = useState("");
-  const [password, setPassword] = useState("");
-  const [ message ,setMessage]=useState("");
-  
-    const navigate = useNavigate();
+  const [email, setEmail] = useState('');
+  const [password, setPassword] = useState('');
+  const [message, setMessage] = useState('');
+  const [messageType, setMessageType] = useState(''); // 'success' or 'error'
+  const [loading, setLoading] = useState(false);
+
+  const navigate = useNavigate();
+  const { login } = useAuth();
+
   const handleLogin = async (e) => {
     e.preventDefault();
-    try {
-      const res = await axios.post("http://127.0.0.1:5000/api/users/login",
-        {email,password}
-      );
-      setMessage(res.data.message);
-      localStorage.setItem("token",res.data.token);
-      localStorage.setItem("user",JSON.stringify(res.data.user));
-      localStorage.setItem("role",res.data.role);
-      if(res.status===200){
-        if(res.data.role === 'admin'){
-          navigate("/admin");
-          console.log("Admin login successful");
+    setLoading(true);
+    setMessage('');
+
+    const result = await login(email, password);
+
+    setLoading(false);
+
+    if (result.success) {
+      setMessageType('success');
+      setMessage(result.message || 'Login successful!');
+      
+      // Navigate based on role
+      setTimeout(() => {
+        if (result.role === 'admin') {
+          navigate(ROUTES.ADMIN);
+        } else {
+          navigate(ROUTES.HOME);
         }
-        // else{
-        //   navigate("/user");
-        // }
-        console.log("Login Successful");
-      };
-    } catch (error) {
-      if(error.response){
-        setMessage(error.response.data.message);
-      }
-      else{
-        setMessage("An error occurred. Please try again later.");
-      }
+      }, 500);
+    } else {
+      setMessageType('error');
+      setMessage(result.message || 'Login failed. Please try again.');
     }
   };
 
@@ -44,31 +48,46 @@ export default function Login() {
       <div className="login-overlay">
         <div className="login-container">
           <h2>Login to Your Account</h2>
+          
+          {message && (
+            <div className={`alert alert-${messageType === 'success' ? 'success' : 'danger'}`} role="alert">
+              {message}
+            </div>
+          )}
+
           <form onSubmit={handleLogin}>
-            <label>Email</label>
-            <input
+            <Input
+              label="Email"
               type="email"
+              name="email"
               value={email}
               onChange={(e) => setEmail(e.target.value)}
               placeholder="Enter your email"
               required
+              autoComplete="email"
             />
 
-            <label>Password</label>
-            <input
+            <Input
+              label="Password"
               type="password"
+              name="password"
               value={password}
               onChange={(e) => setPassword(e.target.value)}
               placeholder="Enter your password"
               required
+              autoComplete="current-password"
             />
 
-            <button type="submit">Login</button>
+            <Button type="submit" variant="primary" fullWidth loading={loading}>
+              {loading ? 'Logging in...' : 'Login'}
+            </Button>
           </form>
-          <p style={{ marginTop: '10px' }}>
-            Don't have an account? 
-            <NavLink to='/signup' className="signup-link" >
-            Sign Up</NavLink>
+
+          <p style={{ marginTop: '20px', textAlign: 'center' }}>
+            Don't have an account?{' '}
+            <NavLink to={ROUTES.SIGNUP} className="signup-link">
+              Sign Up
+            </NavLink>
           </p>
         </div>
       </div>
