@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from "react";
-import axios from "axios";
+import api from "../utils/api";
+import { API_ENDPOINTS } from "../utils/constants";
 import "./usersManagement.css";
 
 export default function UsersManagement() {
@@ -7,33 +8,25 @@ export default function UsersManagement() {
   const [loading, setLoading] = useState(true);
   const [message, setMessage] = useState("");
 
-  // 🔹 جلب المستخدمين من السيرفر
   useEffect(() => {
     fetchUsers();
   }, []);
 
   const fetchUsers = async () => {
     try {
-      const token = localStorage.getItem("token");
-      const res = await axios.get("http://127.0.0.1:5000/api/users/all", {
-        headers: { Authorization: `Bearer ${token}` },
-      });
+      const res = await api.get(API_ENDPOINTS.USERS.ALL);
       setUsers(res.data);
       setLoading(false);
     } catch (err) {
-      setMessage("Failed to attract users");
+      setMessage("Failed to load users");
       setLoading(false);
     }
   };
 
-  // 🔹 حذف مستخدم
   const handleDelete = async (id) => {
     if (!window.confirm("Are you sure you want to delete this user?")) return;
     try {
-      const token = localStorage.getItem("token");
-      await axios.delete(`http://127.0.0.1:5000/api/users/delete/${id}`, {
-        headers: { Authorization: `Bearer ${token}` },
-      });
+      await api.delete(API_ENDPOINTS.USERS.DELETE(id));
       setUsers(users.filter((u) => u._id !== id));
       setMessage("User deleted successfully");
     } catch (err) {
@@ -43,7 +36,7 @@ export default function UsersManagement() {
 
   return (
     <div className="users-container">
-      <h2>User management</h2>
+      <h2>User Management</h2>
 
       {message && <p className="message">{message}</p>}
 
@@ -56,7 +49,7 @@ export default function UsersManagement() {
               <th>Name</th>
               <th>Email</th>
               <th>Role</th>
-              <th>procedures</th>
+              <th>Actions</th>
             </tr>
           </thead>
           <tbody>

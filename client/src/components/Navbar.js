@@ -1,5 +1,5 @@
 import React from 'react';
-import { NavLink, useNavigate } from 'react-router-dom';
+import { NavLink, useNavigate, useLocation } from 'react-router-dom';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faMagnifyingGlass, faUser, faShoppingCart } from '@fortawesome/free-solid-svg-icons';
 import { useAuth } from '../context/AuthContext';
@@ -9,14 +9,27 @@ import './navbar.css';
 export default function Navbar() {
   const { isAuthenticated, logout, user } = useAuth();
   const navigate = useNavigate();
+  const location = useLocation();
 
   const handleLogout = () => {
     logout();
     navigate(ROUTES.LOGIN);
   };
 
+  const scrollToSection = (sectionId) => {
+    if (location.pathname !== '/') {
+      navigate('/');
+      // Wait for navigation then scroll
+      setTimeout(() => {
+        document.getElementById(sectionId)?.scrollIntoView({ behavior: 'smooth' });
+      }, 100);
+    } else {
+      document.getElementById(sectionId)?.scrollIntoView({ behavior: 'smooth' });
+    }
+  };
+
   return (
-    <nav className="navbar navbar-expand-lg navbar-light" role="navigation" aria-label="Main navigation">
+    <nav className="navbar navbar-expand-lg navbar-light fixed-top" role="navigation" aria-label="Main navigation">
       <div className="container-fluid">
         {/* Logo */}
         <NavLink className="navbar-brand" to={ROUTES.HOME} aria-label="My Store Home">
@@ -41,24 +54,29 @@ export default function Navbar() {
           {/* Links */}
           <ul className="navbar-nav mb-2 mb-lg-0">
             <li className="nav-item">
-              <NavLink className="nav-link" to={ROUTES.HOME}>
+              <button className="nav-link btn btn-link" onClick={() => {
+                if (location.pathname !== '/') {
+                  navigate('/');
+                }
+                window.scrollTo({ top: 0, behavior: 'smooth' });
+              }}>
                 HOME
-              </NavLink>
+              </button>
             </li>
             <li className="nav-item">
-              <NavLink className="nav-link" to={ROUTES.COLLECTION}>
+              <button className="nav-link btn btn-link" onClick={() => scrollToSection('collections-section')}>
                 COLLECTION
-              </NavLink>
+              </button>
             </li>
             <li className="nav-item">
-              <NavLink className="nav-link" to={ROUTES.ABOUT}>
+              <button className="nav-link btn btn-link" onClick={() => scrollToSection('about-section')}>
                 ABOUT
-              </NavLink>
+              </button>
             </li>
             <li className="nav-item">
-              <NavLink className="nav-link" to={ROUTES.CONTACT}>
+              <button className="nav-link btn btn-link" onClick={() => scrollToSection('contact-section')}>
                 CONTACT
-              </NavLink>
+              </button>
             </li>
           </ul>
 

@@ -1,5 +1,5 @@
 import React from 'react'
-import { BrowserRouter,Router, Route, Routes,useLocation } from 'react-router-dom';
+import { Route, Routes, useLocation } from 'react-router-dom';
 
 // Import Pages
 import About from './components/About';
@@ -15,9 +15,10 @@ import AdminDashboard from './components/AdminDashboard';
 import Navbar from './components/Navbar';
 
 function App() {
-  const location=useLocation();
+  const location = useLocation();
+
   return (
-    <div className='px-4 sm:px-[5vw] md:pz-[7vm] lg:px-[9vw]'>
+    <div className='app-wrapper'>
       <Navbar/>
       <Routes>
         <Route path='/' element={<Home/>}/>
@@ -28,12 +29,9 @@ function App() {
         <Route path='/signup' element={<Signup/>}/>
         <Route path='/admin' element={<AdminDashboard/>}/>
       </Routes>
-      {/* <Footer/> */}
-      {location.pathname !== "/admin" && <Footer />}
-
+      {!["/admin", "/login", "/signup"].includes(location.pathname) && <Footer />}
     </div>
   )
 }
 
 export default App;
-

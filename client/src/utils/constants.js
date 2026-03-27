@@ -8,7 +8,7 @@ export const API_ENDPOINTS = {
     UPDATE: (id) => `/api/users/update/${id}`,
   },
   PRODUCTS: {
-    ALL: '/api/products',
+    ALL: '/api/products/all',
     CREATE: '/api/products/create',
     DELETE: (id) => `/api/products/delete/${id}`,
     UPDATE: (id) => `/api/products/update/${id}`,

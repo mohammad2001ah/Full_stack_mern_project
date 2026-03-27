@@ -8,6 +8,8 @@
   display: flex;
   justify-content: center;
   align-items: center;
+  margin-top: -70px;
+  padding-top: 70px;
 }
 
 .login-overlay {
@@ -52,7 +54,9 @@
   font-size: 14px;
 }
 
-.login-container button {
+/* Only style the submit button, not the password toggle */
+.login-container button[type="submit"],
+.login-container .btn-primary {
   width: 100%;
   padding: 12px 0;
   background-color: #343834;
@@ -65,7 +69,8 @@
   transition: background-color 0.3s ease;
 }
 
-.login-container button:hover {
+.login-container button[type="submit"]:hover,
+.login-container .btn-primary:hover {
   background-color: #1f1f1f;
 }
 

@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import PropTypes from 'prop-types';
+
 import './Input.css';
 
 const Input = ({
@@ -82,20 +82,6 @@ const Input = ({
   );
 };
 
-Input.propTypes = {
-  label: PropTypes.string,
-  type: PropTypes.string,
-  name: PropTypes.string.isRequired,
-  value: PropTypes.string.isRequired,
-  onChange: PropTypes.func.isRequired,
-  placeholder: PropTypes.string,
-  required: PropTypes.bool,
-  disabled: PropTypes.bool,
-  error: PropTypes.string,
-  helperText: PropTypes.string,
-  className: PropTypes.string,
-  autoComplete: PropTypes.string,
-  ariaLabel: PropTypes.string,
-};
+
 
 export default Input;

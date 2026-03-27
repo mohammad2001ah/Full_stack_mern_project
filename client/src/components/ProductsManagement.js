@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from "react";
-import axios from "axios";
+import api from "../utils/api";
+import { API_ENDPOINTS } from "../utils/constants";
 import "./productsManagement.css";
 
 export default function ProductsManagement() {
@@ -8,81 +9,61 @@ export default function ProductsManagement() {
   const [message, setMessage] = useState("");
   const [newProduct, setNewProduct] = useState({
     name: "",
-    price: 0,
-    stock: 0,
+    price: "",
+    stock: "",
     description: "",
   });
 
-  // 🔹 جلب كل المنتجات
   useEffect(() => {
     fetchProducts();
   }, []);
 
   const fetchProducts = async () => {
     try {
-      const token = localStorage.getItem("token");
-      const res = await axios.get("http://127.0.0.1:5000/api/products/all", {
-        headers: { Authorization: `Bearer ${token}` },
-      });
+      const res = await api.get(API_ENDPOINTS.PRODUCTS.ALL);
       setProducts(res.data);
       setLoading(false);
     } catch (err) {
       setMessage("Failed to load products");
       setLoading(false);
-      console.error(err.response?.data || err.message);
+      console.error(err.message || err);
     }
   };
 
-  // 🔹 حذف منتج
   const handleDelete = async (id) => {
     if (!window.confirm("Are you sure you want to delete this product?")) return;
     try {
-      const token = localStorage.getItem("token");
-      await axios.delete(`http://127.0.0.1:5000/api/products/delete/${id}`, {
-        headers: { Authorization: `Bearer ${token}` },
-      });
+      await api.delete(API_ENDPOINTS.PRODUCTS.DELETE(id));
       setProducts(products.filter((p) => p._id !== id));
       setMessage("Product deleted successfully");
     } catch (err) {
       setMessage("Error deleting product");
-      console.error(err.response?.data || err.message);
+      console.error(err.message || err);
     }
   };
 
-  // 🔹 إنشاء منتج جديد
   const handleCreate = async () => {
     if (!newProduct.name || !newProduct.price || !newProduct.stock) {
       setMessage("Please fill all required fields");
       return;
     }
     try {
-      const token = localStorage.getItem("token");
-      const res = await axios.post(
-        "http://127.0.0.1:5000/api/products/create",
-        {
-          name: newProduct.name,
-          price: newProduct.price,
-          stock: newProduct.stock,
-          description: newProduct.description,
-        },
-        {
-          headers: {
-            Authorization: `Bearer ${token}`,
-            "Content-Type": "application/json",
-          },
-        }
-      );
+      const res = await api.post(API_ENDPOINTS.PRODUCTS.CREATE, {
+        name: newProduct.name,
+        price: Number(newProduct.price),
+        stock: Number(newProduct.stock),
+        description: newProduct.description,
+      });
 
       setProducts([...products, res.data.product]);
-      setNewProduct({ name: "", price: 0, stock: 0, description: "" });
+      setNewProduct({ name: "", price: "", stock: "", description: "" });
       setMessage("Product created successfully");
     } catch (err) {
       setMessage("Error creating product");
-      console.error(err.response?.data || err.message);
+      console.error(err.message || err);
     }
   };
 
-  // 🔹 تحديث الحقول
   const handleChange = (e) => {
     setNewProduct({ ...newProduct, [e.target.name]: e.target.value });
   };
@@ -92,7 +73,6 @@ export default function ProductsManagement() {
       <h2>Products Management</h2>
       {message && <p className="message">{message}</p>}
 
-      {/* Form لإضافة منتج */}
       <div className="product-form">
         <input
           type="text"
@@ -102,18 +82,21 @@ export default function ProductsManagement() {
           onChange={handleChange}
         />
         <input
-          type="text"
+          type="number"
           name="price"
           placeholder="Price"
           value={newProduct.price}
           onChange={handleChange}
+          min="0"
+          step="0.01"
         />
         <input
-          type="text"
+          type="number"
           name="stock"
           placeholder="Stock"
           value={newProduct.stock}
           onChange={handleChange}
+          min="0"
         />
         <input
           type="text"
@@ -142,7 +125,7 @@ export default function ProductsManagement() {
             {products.map((product) => (
               <tr key={product._id}>
                 <td>{product.name}</td>
-                <td>{product.price}</td>
+                <td>${Number(product.price).toFixed(2)}</td>
                 <td>{product.stock}</td>
                 <td>{product.description}</td>
                 <td>

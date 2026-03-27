@@ -1,20 +1,34 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import "./adminDashboard.css";
 import { FaUser, FaBox, FaShoppingCart, FaCog, FaBars, FaSignOutAlt } from "react-icons/fa";
 import { useNavigate } from "react-router-dom";
-import UsersManagement from "./UsersManagement"; // صفحة إدارة المستخدمين
-import ProductsManagement from "./ProductsManagement"; // صفحة إدارة المنتجات
+import { useAuth } from "../context/AuthContext";
+import { ROUTES } from "../utils/constants";
+import UsersManagement from "./UsersManagement";
+import ProductsManagement from "./ProductsManagement";
 
 export default function AdminDashboard() {
-  const [activePage, setActivePage] = useState("dashboard"); // الصفحة الحالية
-  const [isOpen, setIsOpen] = useState(false); // للتحكم بفتح القائمة الجانبية
+  const [activePage, setActivePage] = useState("dashboard");
+  const [isOpen, setIsOpen] = useState(false);
   const navigate = useNavigate();
+  const { logout, isAdmin, loading, isAuthenticated } = useAuth();
 
-  // تسجيل الخروج
+  // Redirect non-admin users
+  useEffect(() => {
+    if (!loading && (!isAuthenticated || !isAdmin())) {
+      navigate(ROUTES.LOGIN);
+    }
+  }, [loading, isAuthenticated, isAdmin, navigate]);
+
   const handleLogout = () => {
-    localStorage.clear();
-    navigate("/login");
+    logout();
+    navigate(ROUTES.LOGIN);
   };
+
+  // Show nothing while checking auth
+  if (loading) {
+    return <div className="dashboard-container"><p>Loading...</p></div>;
+  }
 
   return (
     <div className="dashboard-container">
@@ -40,7 +54,7 @@ export default function AdminDashboard() {
         </ul>
       </aside>
 
-      {/* Overlay (للجوال) */}
+      {/* Overlay (mobile) */}
       {isOpen && <div className="sidebar-overlay" onClick={() => setIsOpen(false)}></div>}
 
       {/* Main Content */}
@@ -57,7 +71,6 @@ export default function AdminDashboard() {
           </button>
         </nav>
 
-        {/* محتوى الصفحة حسب activePage */}
         {activePage === "dashboard" && (
           <div className="stats-grid">
             <div className="card">

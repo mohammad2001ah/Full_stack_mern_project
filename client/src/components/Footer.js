@@ -57,7 +57,7 @@ export default function Footer() {
 
       {/* Copyright */}
       <div className="footer-bottom">
-        <p>© 2025 MY STORE. All Rights Reserved.</p>
+        <p>&copy; {new Date().getFullYear()} MY STORE. All Rights Reserved.</p>
       </div>
     </footer>
   );

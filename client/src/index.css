@@ -89,6 +89,7 @@ body {
   color: var(--color-text);
   background-color: var(--color-white);
   overflow-x: hidden;
+  padding-top: 70px;
 }
 
 /* Typography */
