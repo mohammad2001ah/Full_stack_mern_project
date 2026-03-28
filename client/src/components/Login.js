@@ -53,19 +53,27 @@ export default function Login() {
   };
 
   return (
-    <div className="login-page">
+    <div className="login-page" id="login-page">
       <div className="login-overlay">
-        <div className="login-container">
-          <h2>Login to Your Account</h2>
+        <div className="login-container" id="login-container">
+          <h2 id="login-header">Login to Your Account</h2>
           
           {message && (
-            <div className={`alert alert-${messageType === 'success' ? 'success' : 'danger'}`} role="alert">
+            <div 
+              className={`alert alert-${messageType === 'success' ? 'success' : 'danger'}`} 
+              role="alert"
+              id="login-alert"
+              data-testid="testid-login-alert"
+            >
               {message}
             </div>
           )}
 
-          <form onSubmit={handleLogin}>
+          <form id="login-form" data-testid="testid-login-form" onSubmit={handleLogin}>
             <Input
+              id="login-email"
+              data-testid="testid-login-email"
+              className="input-auth"
               label="Email"
               type="email"
               name="email"
@@ -77,6 +85,9 @@ export default function Login() {
             />
 
             <Input
+              id="login-password"
+              data-testid="testid-login-password"
+              className="input-auth"
               label="Password"
               type="password"
               name="password"
@@ -87,14 +98,22 @@ export default function Login() {
               autoComplete="current-password"
             />
 
-            <Button type="submit" variant="primary" fullWidth loading={loading}>
+            <Button 
+              id="login-submit-btn" 
+              data-testid="testid-login-submit"
+              className="btn-auth-submit"
+              type="submit" 
+              variant="primary" 
+              fullWidth 
+              loading={loading}
+            >
               {loading ? 'Logging in...' : 'Login'}
             </Button>
           </form>
 
           <p style={{ marginTop: '20px', textAlign: 'center' }}>
             Don't have an account?{' '}
-            <NavLink to={ROUTES.SIGNUP} className="signup-link">
+            <NavLink to={ROUTES.SIGNUP} className="signup-link" id="signup-link">
               Sign Up
             </NavLink>
           </p>

@@ -170,22 +170,22 @@ export default function CustomerShop() {
     <div className="customer-shop">
       {/* Toast Notification */}
       {toast && (
-        <div className={`shop-toast ${toast.type}`} role="alert">
+        <div className={`shop-toast ${toast.type}`} role="alert" id="shop-toast" data-testid="testid-shop-toast">
           {toast.message}
         </div>
       )}
 
       {/* Hero Banner */}
-      <section className="shop-hero">
+      <section className="shop-hero" id="shop-hero" data-testid="testid-shop-hero">
         <div className="shop-hero-content">
-          <h1>Shop Our Collection</h1>
+          <h1 id="shop-heading">Shop Our Collection</h1>
           <p>Discover premium clothing & accessories for every style</p>
           <div className="shop-hero-stats">
-            <span><strong>{total}</strong> Products</span>
+            <span id="stat-total-products"><strong>{total}</strong> Products</span>
             <span className="stat-divider">|</span>
-            <span><strong>6</strong> Categories</span>
+            <span id="stat-categories-count"><strong>6</strong> Categories</span>
             <span className="stat-divider">|</span>
-            <span><strong>Free</strong> Shipping</span>
+            <span id="stat-free-shipping"><strong>Free</strong> Shipping</span>
           </div>
         </div>
       </section>
@@ -216,10 +216,12 @@ export default function CustomerShop() {
       </section>
 
       {/* Category Pills */}
-      <section className="shop-categories" aria-label="Product categories">
+      <section className="shop-categories" aria-label="Product categories" id="category-pills-container">
         {CATEGORIES.map((cat) => (
           <button
             key={cat.value}
+            id={`cat-pill-${cat.value}`}
+            data-testid={`testid-cat-pill-${cat.value}`}
             className={`category-pill ${category === cat.value ? 'active' : ''}`}
             onClick={() => updateFilter('category', cat.value)}
             aria-pressed={category === cat.value}
@@ -376,15 +378,18 @@ export default function CustomerShop() {
 
           {/* Product Grid */}
           {!loading && !error && products.length > 0 && (
-            <div className="product-grid">
+            <div className="product-grid" id="product-grid" data-testid="testid-product-grid">
               {products.map((product, index) => (
                 <article
-                  className="product-card"
+                  id={`product-card-${product._id}`}
+                  data-testid={`testid-product-card-${product._id}`}
+                  className="product-card test-product-card"
                   key={product._id}
                   style={{ animationDelay: `${index * 0.05}s` }}
                 >
                   {/* Product Image */}
                   <div
+                    id={`product-img-wrapper-${product._id}`}
                     className="product-image-wrapper"
                     onClick={() => navigate(`/shop/${product._id}`)}
                     role="link"
@@ -393,6 +398,7 @@ export default function CustomerShop() {
                   >
                     {product.image ? (
                       <img
+                        id={`product-img-${product._id}`}
                         src={product.image}
                         alt={product.name}
                         loading="lazy"
@@ -416,19 +422,21 @@ export default function CustomerShop() {
                   {/* Product Info */}
                   <div className="product-info">
                     <h3
+                      id={`product-title-${product._id}`}
+                      data-testid={`testid-product-title-${product._id}`}
                       className="product-name"
                       onClick={() => navigate(`/shop/${product._id}`)}
                     >
                       {product.name}
                     </h3>
-                    <p className="product-description">
+                    <p className="product-description" id={`product-desc-${product._id}`}>
                       {product.description?.substring(0, 80)}
                       {product.description?.length > 80 ? '...' : ''}
                     </p>
 
                     {/* Sizes */}
                     {product.sizes && product.sizes.length > 0 && (
-                      <div className="product-sizes">
+                      <div className="product-sizes" id={`product-sizes-${product._id}`}>
                         {product.sizes.slice(0, 4).map((size) => (
                           <span key={size} className="size-tag">{size}</span>
                         ))}
@@ -450,10 +458,12 @@ export default function CustomerShop() {
                     {/* Price + Action */}
                     <div className="product-footer">
                       <div className="product-price">
-                        <span className="price-current">${product.price.toFixed(2)}</span>
+                        <span className="price-current" id={`product-price-${product._id}`}>${product.price.toFixed(2)}</span>
                       </div>
                       <button
-                        className="add-cart-btn"
+                        id={`add-cart-btn-${product._id}`}
+                        data-testid={`testid-add-cart-${product._id}`}
+                        className="add-cart-btn test-add-btn"
                         onClick={() => handleAddToCart(product._id, product.name)}
                         aria-label={`Add ${product.name} to cart`}
                       >

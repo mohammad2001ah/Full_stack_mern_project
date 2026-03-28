@@ -33,22 +33,22 @@ export default function AdminDashboard() {
   return (
     <div className="dashboard-container">
       {/* Sidebar */}
-      <aside className={`sidebar ${isOpen ? "open" : ""}`}>
+      <aside className={`sidebar ${isOpen ? "open" : ""}`} id="admin-sidebar" data-testid="testid-admin-sidebar">
         <h2 className="sidebar-title">Admin Panel</h2>
         <ul className="sidebar-menu">
-          <li onClick={() => setActivePage("dashboard")}>
+          <li id="admin-nav-dash" onClick={() => setActivePage("dashboard")}>
             <FaBox /> Dashboard
           </li>
-          <li onClick={() => setActivePage("users")}>
+          <li id="admin-nav-users" onClick={() => setActivePage("users")}>
             <FaUser /> Users
           </li>
-          <li onClick={() => setActivePage("products")}>
+          <li id="admin-nav-products" onClick={() => setActivePage("products")}>
             <FaBox /> Products
           </li>
-          <li onClick={() => setActivePage("orders")}>
+          <li id="admin-nav-orders" onClick={() => setActivePage("orders")}>
             <FaShoppingCart /> Orders
           </li>
-          <li onClick={() => setActivePage("settings")}>
+          <li id="admin-nav-settings" onClick={() => setActivePage("settings")}>
             <FaCog /> Settings
           </li>
         </ul>
@@ -60,12 +60,12 @@ export default function AdminDashboard() {
       {/* Main Content */}
       <main className="main-content">
         {/* Navbar */}
-        <nav className="dashboard-navbar">
-          <div className="menu-toggle" onClick={() => setIsOpen(!isOpen)}>
+        <nav className="dashboard-navbar" id="admin-nav">
+          <div className="menu-toggle" onClick={() => setIsOpen(!isOpen)} id="admin-sidebar-toggle">
             <FaBars />
           </div>
-          <h3>Welcome, Admin</h3>
-          <button className="logout-btn" onClick={handleLogout}>
+          <h3 id="admin-welcome">Welcome, Admin</h3>
+          <button className="logout-btn" onClick={handleLogout} id="admin-logout-btn" data-testid="testid-admin-logout">
             <FaSignOutAlt style={{ marginRight: "8px" }} />
             Logout
           </button>
@@ -73,21 +73,21 @@ export default function AdminDashboard() {
 
         {activePage === "dashboard" && (
           <div className="stats-grid">
-            <div className="card">
+            <div className="card test-admin-stat" id="admin-stat-users">
               <h4>Total Users</h4>
-              <p>124</p>
+              <p id="admin-users-count">124</p>
             </div>
-            <div className="card">
+            <div className="card test-admin-stat" id="admin-stat-products">
               <h4>Total Products</h4>
-              <p>58</p>
+              <p id="admin-products-count">58</p>
             </div>
-            <div className="card">
+            <div className="card test-admin-stat" id="admin-stat-orders">
               <h4>Total Orders</h4>
-              <p>34</p>
+              <p id="admin-orders-count">34</p>
             </div>
-            <div className="card">
+            <div className="card test-admin-stat" id="admin-stat-revenue">
               <h4>Revenue</h4>
-              <p>$3,200</p>
+              <p id="admin-revenue-amount">$3,200</p>
             </div>
           </div>
         )}

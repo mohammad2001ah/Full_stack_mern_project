@@ -43,7 +43,7 @@ export default function UsersManagement() {
       {loading ? (
         <p>Loading...</p>
       ) : (
-        <table className="users-table">
+        <table className="users-table" id="users-list-table" data-testid="testid-users-table">
           <thead>
             <tr>
               <th>Name</th>
@@ -54,12 +54,14 @@ export default function UsersManagement() {
           </thead>
           <tbody>
             {users.map((user) => (
-              <tr key={user._id}>
-                <td>{user.name}</td>
-                <td>{user.email}</td>
-                <td>{user.role}</td>
+              <tr key={user._id} id={`row-user-${user._id}`} data-testid="testid-user-row">
+                <td id={`cell-user-name-${user._id}`}>{user.name}</td>
+                <td id={`cell-user-email-${user._id}`}>{user.email}</td>
+                <td id={`cell-user-role-${user._id}`}>{user.role}</td>
                 <td>
                   <button
+                    id={`delete-user-btn-${user._id}`}
+                    data-testid="testid-delete-user"
                     className="delete-btn"
                     onClick={() => handleDelete(user._id)}
                   >

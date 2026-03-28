@@ -4,7 +4,8 @@ import "./sellerDashboard.css";
 import { FaBox, FaShoppingCart, FaCog, FaBars, FaSignOutAlt } from "react-icons/fa";
 import { useNavigate } from "react-router-dom";
 import { useAuth } from "../context/AuthContext";
-import { ROUTES } from "../utils/constants";
+import { ROUTES, API_ENDPOINTS } from "../utils/constants";
+import api from "../utils/api";
 import ProductsManagement from "./ProductsManagement";
 
 export default function SellerDashboard() {
@@ -60,19 +61,19 @@ export default function SellerDashboard() {
   return (
     <div className="dashboard-container seller-dashboard">
       {/* Sidebar */}
-      <aside className={`sidebar ${isOpen ? "open" : ""}`}>
+      <aside className={`sidebar ${isOpen ? "open" : ""}`} id="seller-sidebar" data-testid="testid-seller-sidebar">
         <h2 className="sidebar-title">Seller Panel</h2>
         <ul className="sidebar-menu">
-          <li className={activePage === "dashboard" ? "active" : ""} onClick={() => setActivePage("dashboard")}>
+          <li id="nav-dash" className={activePage === "dashboard" ? "active" : ""} onClick={() => setActivePage("dashboard")}>
             <FaBox /> Dashboard
           </li>
-          <li className={activePage === "products" ? "active" : ""} onClick={() => setActivePage("products")}>
+          <li id="nav-products" className={activePage === "products" ? "active" : ""} onClick={() => setActivePage("products")}>
             <FaBox /> My Products
           </li>
-          <li className={activePage === "orders" ? "active" : ""} onClick={() => setActivePage("orders")}>
+          <li id="nav-orders" className={activePage === "orders" ? "active" : ""} onClick={() => setActivePage("orders")}>
             <FaShoppingCart /> Orders
           </li>
-          <li className={activePage === "settings" ? "active" : ""} onClick={() => setActivePage("settings")}>
+          <li id="nav-settings" className={activePage === "settings" ? "active" : ""} onClick={() => setActivePage("settings")}>
             <FaCog /> Settings
           </li>
         </ul>
@@ -84,34 +85,34 @@ export default function SellerDashboard() {
       {/* Main Content */}
       <main className="main-content">
         {/* Navbar */}
-        <nav className="dashboard-navbar">
-          <div className="menu-toggle" onClick={() => setIsOpen(!isOpen)}>
+        <nav className="dashboard-navbar" id="seller-nav">
+          <div className="menu-toggle" onClick={() => setIsOpen(!isOpen)} id="sidebar-toggle">
             <FaBars />
           </div>
-          <h3>Welcome, {user?.name || 'Seller'}</h3>
-          <button className="logout-btn" onClick={handleLogout}>
+          <h3 id="seller-welcome">Welcome, {user?.name || 'Seller'}</h3>
+          <button className="logout-btn" onClick={handleLogout} id="seller-logout-btn" data-testid="testid-logout-btn">
             <FaSignOutAlt style={{ marginRight: "8px" }} />
             Logout
           </button>
         </nav>
 
         {activePage === "dashboard" && (
-          <div className="stats-grid">
-            <div className="card">
+          <div className="stats-grid" id="seller-stats-grid">
+            <div className="card test-stat-card" id="stat-products">
               <h4>My Products</h4>
-              <p>{statsLoading ? "..." : stats.productCount}</p>
+              <p id="stat-products-count">{statsLoading ? "..." : stats.productCount}</p>
             </div>
-            <div className="card">
+            <div className="card test-stat-card" id="stat-pending">
               <h4>Pending Orders</h4>
-              <p>{statsLoading ? "..." : stats.pendingOrders}</p>
+              <p id="stat-pending-count">{statsLoading ? "..." : stats.pendingOrders}</p>
             </div>
-            <div className="card">
+            <div className="card test-stat-card" id="stat-completed">
               <h4>Completed Orders</h4>
-              <p>{statsLoading ? "..." : stats.completedOrders}</p>
+              <p id="stat-completed-count">{statsLoading ? "..." : stats.completedOrders}</p>
             </div>
-            <div className="card">
+            <div className="card test-stat-card" id="stat-revenue">
               <h4>Revenue</h4>
-              <p>{statsLoading ? "..." : `$${stats.revenue.toLocaleString()}`}</p>
+              <p id="stat-revenue-amount">{statsLoading ? "..." : `$${stats.revenue.toLocaleString()}`}</p>
             </div>
           </div>
         )}

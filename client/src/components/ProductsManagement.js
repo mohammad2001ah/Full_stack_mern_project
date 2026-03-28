@@ -73,8 +73,11 @@ export default function ProductsManagement() {
       <h2>Products Management</h2>
       {message && <p className="message">{message}</p>}
 
-      <div className="product-form">
+      <div className="product-form" id="product-create-form" data-testid="testid-product-form">
         <input
+          id="input-product-name"
+          data-testid="testid-input-product-name"
+          className="form-input"
           type="text"
           name="name"
           placeholder="Name"
@@ -82,6 +85,9 @@ export default function ProductsManagement() {
           onChange={handleChange}
         />
         <input
+          id="input-product-price"
+          data-testid="testid-input-product-price"
+          className="form-input"
           type="number"
           name="price"
           placeholder="Price"
@@ -91,6 +97,9 @@ export default function ProductsManagement() {
           step="0.01"
         />
         <input
+          id="input-product-stock"
+          data-testid="testid-input-product-stock"
+          className="form-input"
           type="number"
           name="stock"
           placeholder="Stock"
@@ -99,19 +108,29 @@ export default function ProductsManagement() {
           min="0"
         />
         <input
+          id="input-product-description"
+          data-testid="testid-input-product-description"
+          className="form-input"
           type="text"
           name="description"
           placeholder="Description"
           value={newProduct.description}
           onChange={handleChange}
         />
-        <button onClick={handleCreate}>Add Product</button>
+        <button 
+          id="add-product-btn" 
+          data-testid="testid-add-product-btn"
+          className="btn-add"
+          onClick={handleCreate}
+        >
+          Add Product
+        </button>
       </div>
 
       {loading ? (
         <p>Loading...</p>
       ) : (
-        <table className="products-table">
+        <table className="products-table" id="products-list-table" data-testid="testid-products-table">
           <thead>
             <tr>
               <th>Name</th>
@@ -123,13 +142,20 @@ export default function ProductsManagement() {
           </thead>
           <tbody>
             {products.map((product) => (
-              <tr key={product._id}>
-                <td>{product.name}</td>
-                <td>${Number(product.price).toFixed(2)}</td>
-                <td>{product.stock}</td>
-                <td>{product.description}</td>
+              <tr key={product._id} id={`row-product-${product._id}`} data-testid="testid-product-row">
+                <td id={`cell-name-${product._id}`}>{product.name}</td>
+                <td id={`cell-price-${product._id}`}>${Number(product.price).toFixed(2)}</td>
+                <td id={`cell-stock-${product._id}`}>{product.stock}</td>
+                <td id={`cell-desc-${product._id}`}>{product.description}</td>
                 <td>
-                  <button className="delete-btn" onClick={() => handleDelete(product._id)}>Delete</button>
+                  <button 
+                    id={`delete-btn-${product._id}`} 
+                    data-testid="testid-delete-product"
+                    className="delete-btn" 
+                    onClick={() => handleDelete(product._id)}
+                  >
+                    Delete
+                  </button>
                 </td>
               </tr>
             ))}
