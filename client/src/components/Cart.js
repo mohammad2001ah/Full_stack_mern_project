@@ -87,7 +87,7 @@ export default function Cart() {
           </div>
           <h2>Your cart is empty</h2>
           <p>Looks like you haven't added anything to your cart yet.</p>
-          <Link to={ROUTES.HOME} className="shop-link">
+          <Link to="/shop" className="shop-link">
             Continue Shopping
           </Link>
         </div>

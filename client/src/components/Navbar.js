@@ -71,6 +71,11 @@ export default function Navbar() {
               </button>
             </li>
             <li className="nav-item">
+              <NavLink className="nav-link" to="/shop">
+                SHOP
+              </NavLink>
+            </li>
+            <li className="nav-item">
               <button className="nav-link btn btn-link" onClick={() => scrollToSection('about-section')}>
                 ABOUT
               </button>

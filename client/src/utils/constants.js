@@ -12,6 +12,8 @@ export const API_ENDPOINTS = {
     CREATE: '/api/products/create',
     DELETE: (id) => `/api/products/delete/${id}`,
     UPDATE: (id) => `/api/products/update/${id}`,
+    BROWSE: '/api/products/shop/browse',
+    DETAIL: (id) => `/api/products/shop/${id}`,
   },
   CART: {
     GET: '/api/cart',
@@ -28,6 +30,8 @@ export const API_ENDPOINTS = {
 export const ROUTES = {
   HOME: '/',
   COLLECTION: '/collection',
+  SHOP: '/shop',
+  PRODUCT_DETAIL: (id) => `/shop/${id}`,
   ABOUT: '/about',
   CONTACT: '/contact',
   LOGIN: '/login',

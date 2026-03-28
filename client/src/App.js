@@ -12,6 +12,8 @@ import Signup from './components/Signup';
 import AdminDashboard from './components/AdminDashboard';
 import SellerDashboard from './components/SellerDashboard';
 import Cart from './components/Cart';
+import CustomerShop from './components/CustomerShop';
+import ProductDetail from './components/ProductDetail';
 
 //Import Components
 import Navbar from './components/Navbar';
@@ -29,6 +31,8 @@ function App() {
       <Routes>
         <Route path='/' element={<Home/>}/>
         <Route path='/collection' element={<Collection/>}/>
+        <Route path='/shop' element={<CustomerShop/>}/>
+        <Route path='/shop/:id' element={<ProductDetail/>}/>
         <Route path='/about' element={<About/>}/>
         <Route path='/contact' element={<Contact/>}/>
         <Route path='/login' element={<Login/>}/>
@@ -51,4 +55,3 @@ function App() {
 }
 
 export default App;
-
