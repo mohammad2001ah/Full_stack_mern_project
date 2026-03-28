@@ -24,8 +24,8 @@ const userSchema = new mongoose.Schema(
     },
     role: {
       type: String,
-      enum: ['user', 'admin'],
-      default: 'user',
+      enum: ['customer', 'seller', 'admin'],
+      default: 'customer',
     },
   },
   {
@@ -33,8 +33,8 @@ const userSchema = new mongoose.Schema(
   }
 );
 
-// Create index on email for faster queries
-userSchema.index({ email: 1 });
+// No manual index needed since email has unique: true on line 15
+// userSchema.index({ email: 1 });
 
 const User = mongoose.model('User', userSchema);
 module.exports = User;

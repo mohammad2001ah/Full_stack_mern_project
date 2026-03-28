@@ -8,7 +8,7 @@ import { ROUTES } from '../utils/constants';
 import './navbar.css';
 
 export default function Navbar() {
-  const { isAuthenticated, logout, user } = useAuth();
+  const { isAuthenticated, logout, user, role } = useAuth();
   const { cartCount } = useCart();
   const navigate = useNavigate();
   const location = useLocation();
@@ -123,6 +123,13 @@ export default function Navbar() {
                       My Profile
                     </button>
                   </li>
+                  {(role === 'admin' || role === 'seller') && (
+                    <li>
+                      <button className="dropdown-item" onClick={() => navigate(role === 'admin' ? ROUTES.ADMIN : ROUTES.SELLER)}>
+                        {role === 'admin' ? 'Admin Dashboard' : 'Seller Dashboard'}
+                      </button>
+                    </li>
+                  )}
                   <li>
                     <button className="dropdown-item" onClick={() => navigate(ROUTES.ORDERS)}>
                       Orders

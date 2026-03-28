@@ -29,8 +29,8 @@ const cartSchema = new mongoose.Schema(
   }
 );
 
-// Index on user for fast lookups
-cartSchema.index({ user: 1 });
+// No manual index needed since user has unique: true on line 23
+// cartSchema.index({ user: 1 });
 
 const Cart = mongoose.model('Cart', cartSchema);
 module.exports = Cart;

@@ -75,12 +75,13 @@ export const AuthProvider = ({ children }) => {
   };
 
   // Register function
-  const register = async (name, email, password) => {
+  const register = async (name, email, password, role = 'customer') => {
     try {
       const response = await api.post(API_ENDPOINTS.USERS.CREATE, {
         name,
         email,
         password,
+        role,
       });
 
       return {
@@ -112,6 +113,11 @@ export const AuthProvider = ({ children }) => {
   // Check if user is admin
   const isAdmin = () => {
     return role === USER_ROLES.ADMIN;
+  };
+
+  // Check if user is seller
+  const isSeller = () => {
+    return role === USER_ROLES.SELLER;
   };
 
   // Update user profile
@@ -149,6 +155,7 @@ export const AuthProvider = ({ children }) => {
     register,
     logout,
     isAdmin,
+    isSeller,
     updateProfile,
   };
 

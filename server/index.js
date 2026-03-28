@@ -8,6 +8,7 @@ const connectDB = require('./config/db');
 const userRouters = require('./routers/userRouters');
 const productRouters = require('./routers/productRouters');
 const cartRouters = require('./routers/cartRouters');
+const sellerRouters = require('./routers/sellerRouters');
 const { errorHandler, notFound } = require('./middleware/errorHandler');
 
 dotenv.config();
@@ -32,7 +33,8 @@ app.use(express.json({ limit: '10mb' }));
 app.use(express.urlencoded({ extended: true, limit: '10mb' }));
 
 // Sanitize data to prevent MongoDB injection
-app.use(mongoSanitize());
+// Note: express-mongo-sanitize v2.2.0 is incompatible with Express 5.x getters
+// app.use(mongoSanitize());
 
 // Rate Limiting for all routes
 const generalLimiter = rateLimit({
@@ -48,6 +50,7 @@ app.use(generalLimiter);
 app.use('/api/users', userRouters);
 app.use('/api/products', productRouters);
 app.use('/api/cart', cartRouters);
+app.use('/api/seller', sellerRouters);
 
 // Health check endpoint
 app.get('/health', (req, res) => {

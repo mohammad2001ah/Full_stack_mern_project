@@ -129,7 +129,7 @@ export default function ProductsManagement() {
                 <td>{product.stock}</td>
                 <td>{product.description}</td>
                 <td>
-                  <button onClick={() => handleDelete(product._id)}>Delete</button>
+                  <button className="delete-btn" onClick={() => handleDelete(product._id)}>Delete</button>
                 </td>
               </tr>
             ))}

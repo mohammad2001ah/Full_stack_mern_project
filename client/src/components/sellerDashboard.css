@@ -1,0 +1,110 @@
+/* ==========================================
+   Modern Seller Panel Styles
+   ========================================== */
+
+.seller-dashboard {
+  background-color: #f0f2f5 !important;
+  color: #333 !important;
+}
+
+/* Sidebar Modernization */
+.seller-dashboard .sidebar {
+  background-color: #ffffff !important;
+  color: #333 !important;
+  box-shadow: 2px 0 10px rgba(0,0,0,0.05);
+  border-right: 1px solid #e1e4e8;
+}
+
+.seller-dashboard .sidebar-title {
+  color: #1a3a3a !important;
+  border-bottom: 2px solid #f0f2f5;
+  padding-bottom: 15px;
+  margin-bottom: 25px;
+}
+
+.seller-dashboard .sidebar-menu li {
+  color: #555 !important;
+  font-weight: 500;
+}
+
+.seller-dashboard .sidebar-menu li:hover,
+.seller-dashboard .sidebar-menu li.active {
+  background-color: #f0f7f7 !important;
+  color: #1a3a3a !important;
+  border-right: 4px solid #1a3a3a;
+}
+
+/* Navbar Modernization */
+.seller-dashboard .dashboard-navbar {
+  background: white;
+  padding: 15px 25px;
+  border-radius: 12px;
+  box-shadow: 0 2px 10px rgba(0,0,0,0.03);
+  margin-bottom: 30px;
+}
+
+.seller-dashboard .dashboard-navbar h3 {
+  color: #1a3a3a;
+  font-weight: 700;
+}
+
+.seller-dashboard .logout-btn {
+  background-color: #1a3a3a !important;
+  color: white !important;
+  font-weight: 600;
+  border-radius: 8px !important;
+  padding: 8px 18px !important;
+  transition: all 0.3s ease;
+}
+
+.seller-dashboard .logout-btn:hover {
+  background-color: #245050 !important;
+  transform: translateY(-2px);
+  box-shadow: 0 4px 10px rgba(26, 58, 58, 0.2);
+}
+
+/* Card Modernization */
+.seller-dashboard .stats-grid {
+  gap: 25px !important;
+}
+
+.seller-dashboard .card {
+  background: white !important;
+  color: #333 !important;
+  padding: 30px !important;
+  border-radius: 15px !important;
+  border: 1px solid #eef0f3 !important;
+  box-shadow: 0 4px 20px rgba(0,0,0,0.05) !important;
+  display: flex !important;
+  flex-direction: column !important;
+  align-items: flex-start !important;
+  text-align: left !important;
+}
+
+.seller-dashboard .card h4 {
+  color: #777 !important;
+  font-size: 0.9rem !important;
+  text-transform: uppercase !important;
+  letter-spacing: 1px !important;
+  margin-bottom: 8px !important;
+}
+
+.seller-dashboard .card p {
+  color: #1a3a3a !important;
+  font-size: 2.2rem !important;
+  font-weight: 800 !important;
+}
+
+.seller-dashboard .card:hover {
+  transform: translateY(-8px) !important;
+  box-shadow: 0 10px 30px rgba(0,0,0,0.1) !important;
+  background-color: #ffffff !important;
+}
+
+/* Mobile Responsive Adjustments */
+@media (max-width: 768px) {
+  .seller-dashboard .main-content {
+    padding: 15px !important;
+  }
+}
+

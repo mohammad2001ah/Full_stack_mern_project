@@ -12,8 +12,7 @@ const validateUserRegistration = [
   body('email')
     .trim()
     .isEmail()
-    .withMessage('Please provide a valid email address')
-    .normalizeEmail(),
+    .withMessage('Please provide a valid email address'),
   
   body('password')
     .isLength({ min: 6 })
@@ -27,8 +26,7 @@ const validateUserLogin = [
   body('email')
     .trim()
     .isEmail()
-    .withMessage('Please provide a valid email address')
-    .normalizeEmail(),
+    .withMessage('Please provide a valid email address'),
   
   body('password')
     .notEmpty()
@@ -49,8 +47,7 @@ const validateUserUpdate = [
     .optional()
     .trim()
     .isEmail()
-    .withMessage('Please provide a valid email address')
-    .normalizeEmail(),
+    .withMessage('Please provide a valid email address'),
 ];
 
 // Middleware to handle validation errors

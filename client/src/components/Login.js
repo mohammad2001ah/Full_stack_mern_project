@@ -40,6 +40,8 @@ export default function Login() {
       setTimeout(() => {
         if (result.role === 'admin') {
           navigate(ROUTES.ADMIN);
+        } else if (result.role === 'seller') {
+          navigate(ROUTES.SELLER);
         } else {
           navigate(ROUTES.HOME);
         }

@@ -2,7 +2,7 @@ const express = require('express');
 const rateLimit = require('express-rate-limit');
 const { createUser, getAllUsers, loginUser, deleteUser, updateUser } = require('../controllers/userController');
 const verifyToken = require('../middleware/auth.js');
-const isAdmin = require('../middleware/isAdmin.js');
+const authorizeRoles = require('../middleware/authorizeRoles.js');
 const {
   validateUserRegistration,
   validateUserLogin,
@@ -39,7 +39,7 @@ router.post(
 );
 
 // Protected routes
-router.get('/all', verifyToken, isAdmin, getAllUsers);
+router.get('/all', verifyToken, authorizeRoles('admin'), getAllUsers);
 
 router.delete('/delete/:id', verifyToken, deleteUser);
 

@@ -14,6 +14,10 @@ const createUser = async (req, res, next) => {
       return res.status(400).json({ message: 'User Already Exists' });
     }
 
+    // Only allow 'customer' or 'seller' via public registration
+    const allowedRoles = ['customer', 'seller'];
+    const assignedRole = allowedRoles.includes(role) ? role : 'customer';
+
     // Hash password
     const hashedPassword = await bcrypt.hash(password, 10);
 
@@ -22,7 +26,7 @@ const createUser = async (req, res, next) => {
       name,
       email,
       password: hashedPassword,
-      role: role || 'user',
+      role: assignedRole,
     });
     await newUser.save();
 

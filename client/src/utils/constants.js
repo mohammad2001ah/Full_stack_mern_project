@@ -19,6 +19,9 @@ export const API_ENDPOINTS = {
     UPDATE: '/api/cart/update',
     REMOVE: (productId) => `/api/cart/remove/${productId}`,
   },
+  SELLER: {
+    STATS: '/api/seller/stats',
+  },
 };
 
 // Route Paths
@@ -30,6 +33,7 @@ export const ROUTES = {
   LOGIN: '/login',
   SIGNUP: '/signup',
   ADMIN: '/admin',
+  SELLER: '/seller',
   CART: '/cart',
   PROFILE: '/profile',
   ORDERS: '/orders',
@@ -37,7 +41,8 @@ export const ROUTES = {
 
 // User Roles
 export const USER_ROLES = {
-  USER: 'user',
+  CUSTOMER: 'customer',
+  SELLER: 'seller',
   ADMIN: 'admin',
 };
 

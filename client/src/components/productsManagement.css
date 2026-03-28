@@ -1,103 +1,136 @@
 .products-container {
-  padding: 20px;
+  padding: 30px;
+  background: white;
+  border-radius: 15px;
+  box-shadow: 0 4px 20px rgba(0,0,0,0.05);
 }
 
 .products-container h2 {
-  margin-bottom: 20px;
-  color: #333;
+  margin-bottom: 25px;
+  color: #1a3a3a;
+  font-weight: 800;
+  font-size: 1.8rem;
 }
 
 .message {
-  margin-bottom: 15px;
-  color: green;
-  font-weight: bold;
-}
-
-/* Form لإضافة منتج */
-.product-form {
-  display: flex;
-  flex-wrap: wrap;
-  gap: 10px;
+  padding: 12px 18px;
+  border-radius: 8px;
   margin-bottom: 20px;
+  background-color: #f0fdf4;
+  color: #166534;
+  font-weight: 500;
+  border-left: 4px solid #166534;
 }
 
-.product-form input[type="text"],
-.product-form input[type="number"],
-.product-form input[type="file"] {
-  padding: 8px;
-  border: 1px solid #ccc;
-  border-radius: 5px;
-  flex: 1 1 150px;
+/* Modern Form */
+.product-form {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+  gap: 15px;
+  margin-bottom: 35px;
+  padding: 25px;
+  background: #f8fafc;
+  border-radius: 12px;
+  border: 1px solid #e2e8f0;
+}
+
+.product-form input {
+  padding: 12px 15px !important;
+  border: 1px solid #e2e8f0 !important;
+  border-radius: 8px !important;
+  font-size: 0.95rem !important;
+  transition: all 0.2s ease !important;
+}
+
+.product-form input:focus {
+  outline: none !important;
+  border-color: #1a3a3a !important;
+  box-shadow: 0 0 0 3px rgba(26, 58, 58, 0.1) !important;
 }
 
 .product-form button {
-  padding: 8px 15px;
-  background-color: #007bff;
+  padding: 12px 25px;
+  background-color: #1a3a3a;
   color: white;
   border: none;
-  border-radius: 5px;
+  border-radius: 8px;
+  font-weight: 600;
   cursor: pointer;
-  transition: background-color 0.3s;
+  transition: all 0.3s ease;
 }
 
 .product-form button:hover {
-  background-color: #0056b3;
+  background-color: #245050;
+  transform: translateY(-2px);
 }
 
-/* جدول المنتجات */
+/* Modern Table */
 .products-table {
   width: 100%;
-  border-collapse: collapse;
-}
-
-.products-table th,
-.products-table td {
-  border: 1px solid #ddd;
-  padding: 10px;
-  text-align: left;
+  border-collapse: separate;
+  border-spacing: 0;
+  margin-top: 10px;
 }
 
 .products-table th {
-  background-color: #f4f4f4;
-  font-weight: bold;
+  background-color: #f1f5f9;
+  color: #475569;
+  font-weight: 700;
+  text-transform: uppercase;
+  font-size: 0.75rem;
+  letter-spacing: 0.05em;
+  padding: 15px;
+  text-align: left;
+  border-bottom: 2px solid #e2e8f0;
 }
 
-.products-table tr:nth-child(even) {
-  background-color: #fafafa;
+.products-table td {
+  padding: 18px 15px;
+  color: #334155;
+  border-bottom: 1px solid #f1f5f9;
+  font-size: 0.95rem;
 }
 
-.products-table img {
-  border-radius: 5px;
-  object-fit: cover;
+.products-table tr:hover td {
+  background-color: #f8fafc;
 }
 
-.products-table button {
-  padding: 5px 10px;
-  background-color: #dc3545;
-  color: white;
+.products-table .delete-btn {
+  padding: 8px 14px;
+  background-color: #fee2e2;
+  color: #991b1b;
   border: none;
-  border-radius: 5px;
+  border-radius: 6px;
+  font-weight: 600;
+  font-size: 0.85rem;
   cursor: pointer;
-  transition: background-color 0.3s;
+  transition: all 0.2s ease;
 }
 
-.products-table button:hover {
-  background-color: #a71d2a;
+.products-table .delete-btn:hover {
+  background-color: #fecaca;
+  color: #7f1d1d;
 }
 
 /* Responsive */
 @media (max-width: 768px) {
   .product-form {
-    flex-direction: column;
+    padding: 15px;
   }
-
-  .products-table th,
+  
+  .products-table th {
+    display: none;
+  }
+  
   .products-table td {
-    padding: 8px;
+    display: block;
+    padding: 10px 5px;
+    border: none;
   }
-
-  .products-table img {
-    width: 40px;
-    height: 40px;
+  
+  .products-table tr {
+    display: block;
+    padding: 15px 0;
+    border-bottom: 1px solid #e2e8f0;
   }
 }
