@@ -10,6 +10,7 @@ import Login from './components/Login';
 import Footer from './components/Footer';
 import Signup from './components/Signup';
 import AdminDashboard from './components/AdminDashboard';
+import Cart from './components/Cart';
 
 //Import Components
 import Navbar from './components/Navbar';
@@ -28,6 +29,7 @@ function App() {
         <Route path='/login' element={<Login/>}/>
         <Route path='/signup' element={<Signup/>}/>
         <Route path='/admin' element={<AdminDashboard/>}/>
+        <Route path='/cart' element={<Cart/>}/>
       </Routes>
       {!["/admin", "/login", "/signup"].includes(location.pathname) && <Footer />}
     </div>

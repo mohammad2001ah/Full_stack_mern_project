@@ -2,6 +2,8 @@ import React from 'react';
 import { useNavigate } from 'react-router-dom';
 import { NavLink } from 'react-router-dom';
 import { ROUTES } from '../utils/constants';
+import { useCart } from '../context/CartContext';
+import { useAuth } from '../context/AuthContext';
 import Button from './common/Button';
 import Input from './common/Input';
 import './home.css';
@@ -21,9 +23,32 @@ import mystore from '../images/mystore.png';
 
 export default function Home() {
   const navigate = useNavigate();
+  const { addToCart } = useCart();
+  const { isAuthenticated } = useAuth();
 
   const handleShopNow = (category) => {
     navigate(ROUTES.COLLECTION);
+  };
+
+  const [cartAlert, setCartAlert] = React.useState(null);
+
+  const handleAddToCart = async (productId, productName) => {
+    if (!isAuthenticated) {
+      navigate(ROUTES.LOGIN);
+      return;
+    }
+    if (!productId) {
+      setCartAlert({ message: 'This is a demo item — add real products from the admin panel!', type: 'info' });
+      setTimeout(() => setCartAlert(null), 3000);
+      return;
+    }
+    const result = await addToCart(productId, 1);
+    if (result.success) {
+      setCartAlert({ message: `${productName} added to cart!`, type: 'success' });
+    } else {
+      setCartAlert({ message: result.message, type: 'error' });
+    }
+    setTimeout(() => setCartAlert(null), 3000);
   };
 
   const [contactForm, setContactForm] = React.useState({
@@ -58,6 +83,19 @@ export default function Home() {
 
   return (
     <div className="home-page">
+      {/* Cart Alert Toast */}
+      {cartAlert && (
+        <div className={`cart-alert ${cartAlert.type}`} role="alert" style={{
+          position: 'fixed', top: '80px', right: '20px', padding: '12px 24px',
+          borderRadius: '6px', color: '#fff', fontWeight: 500, zIndex: 1070,
+          boxShadow: '0 6px 20px rgba(0,0,0,0.15)',
+          backgroundColor: cartAlert.type === 'success' ? '#28a745' : cartAlert.type === 'error' ? '#dc3545' : '#17a2b8',
+          animation: 'cartAlertSlide 0.3s ease-out',
+        }}>
+          {cartAlert.message}
+        </div>
+      )}
+
       {/* ===== Hero Section ===== */}
       <section
         className="hero"
@@ -117,36 +155,56 @@ export default function Home() {
               <img src={man} alt="Men's fashion collection" loading="lazy" />
               <h3>Men's Collection</h3>
               <p>Modern and stylish outfits for every occasion.</p>
-              <button onClick={() => handleShopNow('men')} aria-label="Shop men's collection">
-                Shop Now
-              </button>
+              <div className="collection-card-actions">
+                <button onClick={() => handleShopNow('men')} aria-label="Shop men's collection">
+                  Shop Now
+                </button>
+                <button className="add-to-cart-btn" onClick={() => handleAddToCart(null, "Men's Collection")} aria-label="Add men's collection to cart">
+                  🛒 Add to Cart
+                </button>
+              </div>
             </article>
 
             <article className="collection-card">
               <img src={he} alt="Accessories collection" loading="lazy" />
               <h3>Accessories</h3>
               <p>Complete your style with our trendy accessories.</p>
-              <button onClick={() => handleShopNow('accessories')} aria-label="Shop accessories">
-                Shop Now
-              </button>
+              <div className="collection-card-actions">
+                <button onClick={() => handleShopNow('accessories')} aria-label="Shop accessories">
+                  Shop Now
+                </button>
+                <button className="add-to-cart-btn" onClick={() => handleAddToCart(null, 'Accessories')} aria-label="Add accessories to cart">
+                  🛒 Add to Cart
+                </button>
+              </div>
             </article>
 
             <article className="collection-card">
               <img src={women} alt="Women's fashion collection" loading="lazy" />
               <h3>Women's Collection</h3>
               <p>Elegant and comfortable designs for all seasons.</p>
-              <button onClick={() => handleShopNow('women')} aria-label="Shop women's collection">
-                Shop Now
-              </button>
+              <div className="collection-card-actions">
+                <button onClick={() => handleShopNow('women')} aria-label="Shop women's collection">
+                  Shop Now
+                </button>
+                <button className="add-to-cart-btn" onClick={() => handleAddToCart(null, "Women's Collection")} aria-label="Add women's collection to cart">
+                  🛒 Add to Cart
+                </button>
+              </div>
             </article>
 
             <article className="collection-card">
               <img src={child} alt="Kids fashion collection" loading="lazy" />
               <h3>Kid's Collection</h3>
               <p>Stylish and comfy outfits for every season.</p>
-              <button onClick={() => handleShopNow('kids')} aria-label="Shop kids collection">
-                Shop Now
-              </button>
+              <div className="collection-card-actions">
+                <button onClick={() => handleShopNow('kids')} aria-label="Shop kids collection">
+                  Shop Now
+                </button>
+                <button className="add-to-cart-btn" onClick={() => handleAddToCart(null, "Kid's Collection")} aria-label="Add kids collection to cart">
+                  🛒 Add to Cart
+                </button>
+              </div>
             </article>
           </div>
         </div>

@@ -3,11 +3,13 @@ import { NavLink, useNavigate, useLocation } from 'react-router-dom';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faMagnifyingGlass, faUser, faShoppingCart } from '@fortawesome/free-solid-svg-icons';
 import { useAuth } from '../context/AuthContext';
+import { useCart } from '../context/CartContext';
 import { ROUTES } from '../utils/constants';
 import './navbar.css';
 
 export default function Navbar() {
   const { isAuthenticated, logout, user } = useAuth();
+  const { cartCount } = useCart();
   const navigate = useNavigate();
   const location = useLocation();
 
@@ -86,8 +88,11 @@ export default function Navbar() {
           </div>
 
           {/* Cart Icon */}
-          <NavLink to={ROUTES.CART} className="d-flex cart mx-2" aria-label="Shopping cart">
+          <NavLink to={ROUTES.CART} className="d-flex cart mx-2 position-relative" aria-label="Shopping cart">
             <FontAwesomeIcon icon={faShoppingCart} />
+            {cartCount > 0 && (
+              <span className="cart-badge">{cartCount > 99 ? '99+' : cartCount}</span>
+            )}
           </NavLink>
 
           {/* User Dropdown */}

@@ -13,6 +13,12 @@ export const API_ENDPOINTS = {
     DELETE: (id) => `/api/products/delete/${id}`,
     UPDATE: (id) => `/api/products/update/${id}`,
   },
+  CART: {
+    GET: '/api/cart',
+    ADD: '/api/cart/add',
+    UPDATE: '/api/cart/update',
+    REMOVE: (productId) => `/api/cart/remove/${productId}`,
+  },
 };
 
 // Route Paths

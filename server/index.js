@@ -7,6 +7,7 @@ const mongoSanitize = require('express-mongo-sanitize');
 const connectDB = require('./config/db');
 const userRouters = require('./routers/userRouters');
 const productRouters = require('./routers/productRouters');
+const cartRouters = require('./routers/cartRouters');
 const { errorHandler, notFound } = require('./middleware/errorHandler');
 
 dotenv.config();
@@ -46,6 +47,7 @@ app.use(generalLimiter);
 // Routes
 app.use('/api/users', userRouters);
 app.use('/api/products', productRouters);
+app.use('/api/cart', cartRouters);
 
 // Health check endpoint
 app.get('/health', (req, res) => {
