@@ -31,8 +31,8 @@ export default function Signup() {
       newErrors.email = 'Please enter a valid email address';
     }
 
-    if (password.length < VALIDATION.PASSWORD_MIN_LENGTH) {
-      newErrors.password = `Password must be at least ${VALIDATION.PASSWORD_MIN_LENGTH} characters`;
+    if (!VALIDATION.PASSWORD_REGEX.test(password)) {
+      newErrors.password = `Password must be at least ${VALIDATION.PASSWORD_MIN_LENGTH} characters and include uppercase, lowercase, numbers, and symbols (@$!%*?&)`;
     }
 
     if (password !== confirmPassword) {
@@ -131,7 +131,7 @@ export default function Signup() {
               placeholder="Enter your password"
               required
               error={errors.password}
-              helperText={`Minimum ${VALIDATION.PASSWORD_MIN_LENGTH} characters`}
+              helperText={`Min ${VALIDATION.PASSWORD_MIN_LENGTH} characters, uppercase, lowercase, number, symbol`}
               autoComplete="new-password"
             />
 
