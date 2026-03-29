@@ -58,7 +58,11 @@ api.interceptors.response.use(
           console.error('Server error:', data.message);
           break;
         default:
-          console.error('API Error:', data.message);
+          {
+            const errorMessage = data.message || 'An error occurred';
+            const extraInfo = data.errors ? `\nErrors:\n- ${data.errors.join('\n- ')}` : '';
+            console.error(`API Error (${status}): ${errorMessage}${extraInfo}`);
+          }
       }
 
       return Promise.reject(error.response.data);

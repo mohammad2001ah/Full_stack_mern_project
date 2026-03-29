@@ -46,6 +46,9 @@ const generalLimiter = rateLimit({
 });
 app.use(generalLimiter);
 
+// Handle favicon.ico requests (common browser behavior)
+app.get('/favicon.ico', (req, res) => res.status(204).end());
+
 // Routes
 app.use('/api/users', userRouters);
 app.use('/api/products', productRouters);

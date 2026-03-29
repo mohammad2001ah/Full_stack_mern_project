@@ -18,14 +18,11 @@ const createUser = async (req, res, next) => {
     const allowedRoles = ['customer', 'seller'];
     const assignedRole = allowedRoles.includes(role) ? role : 'customer';
 
-    // Hash password
-    const hashedPassword = await bcrypt.hash(password, 10);
-
-    // Create new user
+    // Create new user (pre-save hook in user model handles hashing)
     const newUser = new User({
       name,
       email,
-      password: hashedPassword,
+      password, // Pass plain password, model will hash it
       role: assignedRole,
     });
     await newUser.save();
@@ -51,15 +48,19 @@ const loginUser = async (req, res, next) => {
   const { email, password } = req.body;
   
   try {
-    const user = await User.findOne({ email });
+    const user = await User.findOne({ email }).select('+password');
     if (!user) {
+      console.log(`Login Failed: User not found for email ${email}`);
       return res.status(401).json({ message: 'Invalid Email Or Password' });
     }
 
     const isMatched = await bcrypt.compare(password, user.password);
     if (!isMatched) {
+      console.log(`Login Failed: Password mismatch for user ${email}`);
       return res.status(401).json({ message: 'Invalid Email Or Password' });
     }
+
+    console.log(`Login Success: User ${email} authenticated successfully`);
 
     const token = jwt.sign(
       { id: user._id, role: user.role },

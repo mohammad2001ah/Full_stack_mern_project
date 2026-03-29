@@ -6,8 +6,8 @@ const validateUserRegistration = [
     .trim()
     .isLength({ min: 2 })
     .withMessage('Name must be at least 2 characters long')
-    .matches(/^[a-zA-Z\s]+$/)
-    .withMessage('Name can only contain letters and spaces'),
+    .matches(/^[a-zA-Z0-9\s]+$/)
+    .withMessage('Name can only contain letters, numbers, and spaces'),
   
   body('email')
     .trim()
@@ -40,8 +40,8 @@ const validateUserUpdate = [
     .trim()
     .isLength({ min: 2 })
     .withMessage('Name must be at least 2 characters long')
-    .matches(/^[a-zA-Z\s]+$/)
-    .withMessage('Name can only contain letters and spaces'),
+    .matches(/^[a-zA-Z0-9\s]+$/)
+    .withMessage('Name can only contain letters, numbers, and spaces'),
   
   body('email')
     .optional()
@@ -56,6 +56,7 @@ const handleValidationErrors = (req, res, next) => {
   
   if (!errors.isEmpty()) {
     const errorMessages = errors.array().map(error => error.msg);
+    console.log(`Validation Failed for ${req.originalUrl}:`, errorMessages); // Log errors for server-side debugging
     return res.status(400).json({
       message: 'Validation failed',
       errors: errorMessages,
