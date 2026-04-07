@@ -1,0 +1,9 @@
+{
+  "permissions": {
+    "allow": [
+      "Bash(wc -l /d/Full_stack_mern_project1/Full_stack_mern_project/client/src/**/*.js)",
+      "Bash(wc -l /d/Full_stack_mern_project1/Full_stack_mern_project/server/*.js /d/Full_stack_mern_project1/Full_stack_mern_project/server/**/*.js)",
+      "Bash(npm audit:*)"
+    ]
+  }
+}

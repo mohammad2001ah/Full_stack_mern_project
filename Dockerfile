@@ -1,10 +1,9 @@
 # Stage 1: Build the React frontend
 FROM node:18-alpine AS build
 
-# Build client
 WORKDIR /app/client
 COPY client/package*.json ./
-RUN npm install
+RUN npm ci
 COPY client/ ./
 RUN npm run build
 
@@ -13,20 +12,16 @@ FROM node:18-alpine
 
 WORKDIR /app/server
 COPY server/package*.json ./
-# Install production dependencies only
-RUN npm install --production
+RUN npm ci --omit=dev
 
-# Copy server code
 COPY server/ ./
 
 # Copy built frontend assets to the server's public folder
 COPY --from=build /app/client/build ./public
 
-# Ensure the server knows it's running in production so it serves the frontend
 ENV NODE_ENV=production
 ENV PORT=5000
 
 EXPOSE 5000
 
-# Start the server
-CMD ["npm", "start"]
+CMD ["node", "index.js"]
