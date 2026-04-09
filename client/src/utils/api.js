@@ -3,7 +3,7 @@ import { STORAGE_KEYS } from './constants';
 
 // Create axios instance with base configuration
 const api = axios.create({
-  baseURL: process.env.REACT_APP_API_URL || 'http://127.0.0.1:5000',
+  baseURL: process.env.REACT_APP_API_URL || 'https://full-stack-mern-project-1xdf.onrender.com',
   headers: {
     'Content-Type': 'application/json',
   },
