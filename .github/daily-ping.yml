@@ -1,0 +1,14 @@
+name: Daily render ping
+
+on:
+  schedule:
+    - cron: '*/14 * * * *'   
+  workflow_dispatch:
+
+jobs:
+  curl-website:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Ping website
+        run: curl -s https://full-stack-mern-project-roan.vercel.app/
